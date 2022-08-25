@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Quick Sort | DSA </title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+    <!-- BODY STARTS -->
+    <main>
+        <h1 class="main_head">Quick Sort </h1>
+        <div id="main_content">
+            <p class="code_description">
+                QuickSort is a <b>Divide and Conquer algorithm</b>. It picks an element as a pivot and partitions the
+                given array around the picked pivot. There are many different versions of quickSort that pick pivot in
+                different ways.
+            <ul class="code_description">
+                <li>Always pick the first element as a pivot.</li>
+                <li>Always pick the last element as a pivot.</li>
+                <li>Pick a random element as a pivot.</li>
+                <li>Pick median as the pivot.</li>
+            </ul>
+            </p>
+            <p class="code_description">
+                It is an approach where :
+            <ol class="code_description" type="1">
+                <li>An array is divided into sub-arrays by selecting a <b>pivot element</b> (element selected from the
+                    array).
+                    <br>
+                    While dividing the array, the pivot element should be positioned in such a way that elements less
+                    than pivot are kept on the left side and elements greater than pivot are on the right side of the
+                    pivot.
+                </li>
+                <li>The left and right sub-arrays are also divided using the same approach. This process continues until
+                    each subarray contains a single element.</li>
+                <li>At this point, elements are already sorted. Finally, elements are combined to form a sorted array.
+                </li>
+            </ol>
+            </p>
+            <h2 class="headings">Working :</h2>
+            <ol class="code_description" type="1">
+                <li><b>Select the pivot element :</b> <br>
+                    There are different variations of quicksort where the pivot element is selected from different
+                    positions. Here, we will be selecting the rightmost element of the array as the pivot element.
+                </li>
+                <li><b>Rearrange the array :</b> <br>
+                    Now the elements of the array are rearranged so that elements that are smaller than the pivot are
+                    put on the left and the elements greater than the pivot are put on the right.
+                    <p>
+                        <b>Here's how we rearrange the array:</b>
+                        <br>
+                    <ol type="i">
+                        <li>A pointer is fixed at the pivot element. The pivot element is compared with the elements
+                            beginning
+                            from the first index.</li>
+                        <li>If the element is greater than the pivot element, a second pointer is set for that element.
+                        </li>
+                        <li>Now, pivot is compared with other elements. If an element smaller than the pivot element is
+                            reached,
+                            the smaller element is swapped with the greater element found earlier.</li>
+                        <li>Again, the process is repeated to set the next greater element as the second pointer. And,
+                            swap it
+                            with another smaller element.</li>
+                        <li>The process goes on until the second last element is reached.</li>
+                        <li>Finally, the pivot element is swapped with the second pointer.</li>
+
+                    </ol>
+
+                    </p>
+                </li>
+                <li><b>Divide Sub-arrays :</b>
+                    <p >Pivot elements are again chosen for the left and the right sub-parts
+                        separately. And, step 2 is repeated.
+                        <br>The sub-arrays are divided until each subarray is formed of a single element. At this point, the array is already sorted.
+                    </p>
+                </li>
+            </ol>
+            <h2 class="headings">Algorithm</h2>
+            <h3 class="algo_subheads" style="text-decoration: underline;">Quicksort Algorithm :</h3>
+<pre class="code_description">
+        QUICKSORT (array A, start, end)     
+        {  
+        1 if (start < end)     
+        2 {  
+        3 p = partition(A, start, end)  
+        4 QUICKSORT (A, start, p - 1)    
+        5 QUICKSORT (A, p + 1, end)    
+        6 }   
+        }              
+</pre>
+<h3 class="algo_subheads" style="text-decoration: underline;">Partition Algorithm :</h3>
+<pre class="code_description">
+        PARTITION (array A, start, end)     
+        {  
+        1 pivot ? A[end]     
+        2 i ? start-1     
+        3 for j ? start to end -1 {  
+        4 do if (A[j] < pivot) {    
+        5 then i ? i + 1     
+        6 swap A[i] with A[j]   
+        7  }}   
+        8 swap A[i+1] with A[end]     
+        9 return i+1  
+        }        
+</pre>
+                    <p class="code_description">
+
+                    </p>
+
+                    <h2 class="headings">Program using C</h2>
+                    <!-- CODE BOX -->
+                            <textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;">
+//QUICK SORT
+#include <stdio.h>  
+    /* function that consider last element as pivot,  
+    place the pivot at its exact position, and place  
+    smaller elements to left of pivot and greater  
+    elements to right of pivot.  */  
+    int partition (int a[], int start, int end)  
+    {  
+        int pivot = a[end]; // pivot element  
+        int i = (start - 1);  
+      
+        for (int j = start; j <= end - 1; j++)  
+        {  
+            // If current element is smaller than the pivot  
+            if (a[j] < pivot)  
+            {  
+                i++; // increment index of smaller element  
+                int t = a[i];  
+                a[i] = a[j];  
+                a[j] = t;  
+            }  
+        }  
+        int t = a[i+1];  
+        a[i+1] = a[end];  
+        a[end] = t;  
+        return (i + 1);  
+    }  
+      
+    /* function to implement quick sort */  
+    void quick(int a[], int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */  
+    {  
+        if (start < end)  
+        {  
+            int p = partition(a, start, end); //p is the partitioning index  
+            quick(a, start, p - 1);  
+            quick(a, p + 1, end);  
+        }  
+    }  
+      
+    /* function to print an array */  
+    void printArr(int a[], int n)  
+    {  
+        int i;  
+        for (i = 0; i < n; i++)  
+            printf("%d ", a[i]);  
+    }  
+    int main()  
+    {  
+        int a[] = { 24, 9, 29, 14, 19, 27 };  
+        int n = sizeof(a) / sizeof(a[0]);  
+        printf("Before sorting array elements are - \n");  
+        printArr(a, n);  
+        quick(a, 0, n - 1);  
+        printf("\nAfter sorting array elements are - \n");    
+        printArr(a, n);  
+          
+        return 0;  
+    }  
+</textarea>
+
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+                        <!-- FOOTER STARTS -->
+                        <footer>
+                            <div class="footer">
+
+                                <div class="first-content">
+                                    <h3><a href="AboutUs.html">About Us</a></h3>
+                                    <p>
+                                        At <strong>www.chaosencoded.com </strong> believe that once in a while each one
+                                        of us
+                                        needs helping hand.
+                                        Delivering some relief in form solution to our problems makes us happy. We aim
+                                        to be our
+                                        users first
+                                        thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                                    </p>
+                                </div>
+
+                                <div class="middle-content">
+                                    <a href="terms.html" style="margin: 5px;">Terms</a><br>
+
+                                    <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+
+                                    <img src="img/email_icon.png" alt="img" width="30px"
+                                        style="float: left;clear: both;"><a href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+
+                                    <img src="img/phone_icon.png" alt="img" width="20px"
+                                        style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a
+                                        href="tel:+916234673424" style="float: left;margin-top: 30px;padding: 5px;">+91
+                                        6234673424</a>
+
+                                </div>
+                                <div class="follow-us">
+                                    <h3>Follow Us</h3>
+
+                                    <div class="icon">
+                                        <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img"
+                                                width="30px"></a>
+                                    </div>
+
+                                    <div class="icon">
+                                        <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img"
+                                                width="30px"></a>
+                                    </div>
+
+                                    <div class="icon">
+                                        <a href="#" target="_blank"><img src="img/github_icon.png" alt="img"
+                                                width="30px"></a>
+                                    </div>
+
+                                    <div class="icon">
+                                        <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img"
+                                                width="30px"></a>
+                                    </div>
+
+                                </div>
+
+                                <div class="lower-footer">
+                                    <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                                </div>
+
+                            </div>
+                        </footer>
+                        <!-- FOOTER ENDS -->
+</body>
+
+</html>

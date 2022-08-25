@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Polynomial representation and addition using Linked List </title>
+    <style>
+        #poly_img{
+            margin-left:20%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Polynomial representation and addition using Linked List </h1>
+        <div id="main_content">
+            <p class="code_description">
+                A polynomial p(x) is the expression in variable x which is in the form (axn + bxn-1 + …. + jx+ k), where a, b, c …., k fall in the category of real numbers and 'n' is non negative integer, which is called the degree of polynomial.
+            </p>
+            <p class="code_description">
+                An essential characteristic of the polynomial is that each term in the polynomial expression consists of two parts:
+            <ul class="code_description" type="disc">
+                <li>Coefficient</li>
+                <li>Exponent</li>
+            </ul>
+            </p>
+            <h3 class="algo_subheads" style="text-decoration: underline;">Example :</h3>
+            <p class="code_description">
+                10x<sup>2</sup> + 26x, here 10 and 26 are coefficients and 2, 1 is its exponential value.
+            </p>
+            <h3 class="algo_subheads" style="text-decoration: underline;">Points to keep in Mind while working with Polynomials :</h3>
+            <p class="code_description">
+                <ul class="code_description" type="disc">
+                    <li>The sign of each coefficient and exponent is stored within the coefficient and the exponent itself.</li>
+                    <li>Additional terms having equal exponent is possible one.</li>
+                    <li>The storage allocation for each term in the polynomial must be done in ascending and descending order of their exponent.</li>
+                </ul>
+            </p>
+            
+            <h3 class="algo_subheads" style="text-decoration: underline;">Representation of polynomial :</h3>
+            
+            
+            
+            <p class="code_description">
+                Polynomial can be represented in the various ways. These are:
+                <ul class="code_description" type="disc">
+                    <li>Using array</li>
+                    <li>Using linked list</li>
+                </ul>
+            </p>
+            <h3 class="algo_subheads" style="text-decoration: underline;">Polynomial  using linked list:</h3>
+            <p class="code_description">
+                We store each polynomial as a singly linked list where each node stores the exponent and coefficient in the data part and a reference to the next node as shown in the figure below. Their sum is then stored in another linked list
+            </p>
+            <img id="poly_img"src="img\working-with-Polynomials.png" alt="DLL Node" width="60%">
+            <h3 class="algo_subheads" style="text-decoration: underline;">Procedure :</h3>
+            <p class="code_description">
+                We store each polynomial as a singly linked list where each node stores the exponent and coefficient in the data part and a reference to the next node as shown in the figure below. Their sum is then stored in another linked list
+            </p>
+            
+
+            
+            <h2 class="headings">Algorithm</h2>
+<pre class="code_description">
+Step 1: Start.
+Step 2: Define user defined datatype node consisting of int coefficient and exponent and a pointer next of type node.
+Step 3: Defining create function
+	struct node* create(struct node* head, int co, int exp)
+		Check if(head == Null)
+			temp <- GetNode(node)
+			temp.co <- co
+			temp.exp <- exp
+			temp.next <- Null
+			Set head <- temp
+		otherwise
+			Set temp <- head
+			while(temp.next ≠ Null) do
+				temp <- temp.next
+			flag <- GetNode(node)
+			flag.co <- co
+			flag.exp <- exp
+			flag.next <- Null
+			temp.next <- flag
+	         return head
+
+Step 4: Defining Addition function
+	struct node* polyAdd(struct node *p1, struct node *p2, struct node *sum)
+		Set poly1 <- p1
+		Set poly2 <- p2
+		Set result <- Null
+		check if(poly1 ≠ Null AND poly2 == Null) 
+			Set sum <- poly1
+			Return sum
+		else if(poly1 == Null AND poly2 ≠ Null)
+			Set sum <- poly2
+			Return sum
+		while(poly1 ≠ Null AND poly2 ≠ Null) do
+			Check if(sum == Null)
+				sum <- GetNode(node)
+				Set result  <- sum
+			Otherwise
+				result.next <- GetNode(node)
+				Set result <- result.next
+			Check if(poly1.exp > poly2.exp)
+				Set result.co <- poly1.co
+				Set result.exp <- poly1.exp
+				Set poly1 <- poly1.next
+			Check if(poly1.exp < poly2.exp)
+				Set result.co <- poly2.co
+				Set result.exp <- poly2.exp
+				Set poly2 <- poly2.next
+			Otherwise
+				Set result.co <- poly1.co + poly2.co
+				Set result.exp  <- poly1.exp
+				Set poly1  <- poly1.next
+				Set poly2  <- poly2.next
+		while(poly1 ≠ Null) do
+			Set result.next  <- GetNode(node)
+			Set result <- result.next
+			Set result.co <- poly1.co
+			Set result.exp <- poly1.exp
+			Set poly1 <- poly1.next
+		while(poly2 ≠ Null) do
+			Set result.next <- GetNode(node)
+			Set result  <- result.next
+			Set result.co <- poly2.co
+			Set result.exp <- poly2.exp
+			Set poly2 <- poly2.next
+		Set result.next <- Null
+		Return sum
+
+Step 5: Defining Display function
+	void display(struct node* head)
+		Set temp <- head
+		while(temp ≠ Null) do
+			Display temp.co, temp.exp
+			Set temp <- temp.next
+
+Step 6: Defining Main function
+	Set p1 <- Null
+	Set p2 <- Null
+	Set sum <- Null
+	Set flag <- 1
+	while(flag == 1) do
+		Display “1: Create Polynomial 1”
+		Display “2: Create Polynomial 2”
+		Display “3: Perform Addition”
+		Display “4: Exit”
+		Read choice
+		switch(choice)
+			Case 1:
+				Display “Enter coefficient for polynomial 1”
+				Read co
+				Display “Enter exponent for polynomial 1”
+				Read exp
+				Call create(p1, co, exp)
+			Case 2: 
+				Display “Enter coefficient for polynomial 2”
+				Read co
+				Display “Enter exponent for polynomial 2”
+				Read exp
+				Call create(p2, co, exp)
+			Case 3:
+				Set sum <- call polyAdd(p1, p2, sum)
+				Call display(sum)
+			Case 4:
+				Set flag <- 0
+		End switch
+
+Step 7: Stop
+</pre>  
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//CIRCULAR SINGLY LINKED LIST
+#include <stdio.h>
+#include <stdlib.h>
+    
+//polynomial node structure struct node
+struct node
+{
+    int co, exp;
+    struct node* next;
+};
+    
+//create a polynomial
+struct node* create (struct node* head, int co, int exp)
+{
+    struct node *temp, *flag;
+//if polynomial empty. make the node the head node
+
+    if(head == NULL)
+    {
+        temp = (struct node*)malloc(sizeof(struct node));
+        temp->co = co;
+        temp->exp = exp;
+        temp->next = NULL;
+        head=temp;
+    }
+    else
+    {
+    //else go to the last node and append
+    temp = head;
+    while(temp->next != NULL)
+        temp = temp->next;
+    flag = (struct node *)malloc(sizeof(struct node));
+    flag->co = co;
+    flag->exp = exp;
+    flag->next = NULL;
+    temp->next = flag;
+    }
+        
+    return head;
+} 
+    
+//add two polynomial
+struct node* polyAdd (struct node *p1, struct node *p2, struct node *sum)
+{
+    //copy the two polynomial and initialize variable res to store the sum 
+    struct node *poly1 = p1, *poly2 = p2, *res;
+
+    //if polynomial 2 is null, set polynomial 1 as the sum
+    if(poly1 != NULL && poly2 == NULL)
+    { 
+    sum = poly1;
+    return sum;
+    }
+    
+    //if polynomial 1 is null, set polynomial 2 as the sum 
+    else if(poly1 == NULL && poly2 != NULL)
+    {
+    sum = poly2;
+    return sum;
+    }
+            
+    //if both polynomials are non-empty
+     while (poly1 != NULL && poly2 != NULL)
+    {
+    //if the sum is empty, initialize sum with a node structure 
+    //and set res equal to sum
+    if(sum == NULL)
+    {
+        sum = (struct node *)malloc(sizeof(struct node));
+        res = sum;
+    }
+            
+    //add a new node structure at the end of res to store sum
+    else
+    {
+        res->next = (struct node *)malloc(sizeof(struct node));;
+        res = res->next;
+    }
+    
+    //if exponent of current node of polynomial 1 is greater than that of polynomial 2
+    //add it to the sum 
+    if (poly1->exp  > poly2->exp)
+    {
+        res->co = poly1->co;
+        res->exp = poly1->exp;
+        poly1 = poly1->next;
+    }
+    
+    //if exponent of current node of polynomial 2 is greater than that of polynomial 1 
+    //add it to the sum 
+    else if (poly1->exp < poly2->exp)
+    {
+        res->co = poly2->co; 
+        res->exp = poly2->exp;
+        poly2 = poly2->next;
+    }
+    
+    //if exponent of current node of polynomial 1 is equal to that of polynomial 2 
+    //add the sum of their co-efficient to the sum 
+    else if(poly1->exp == poly2->exp)
+    {
+        res->co = poly1->co + poly2->co;
+        res->exp = poly1->exp;
+        poly1 = poly1->next;
+        poly2 = poly2->next;
+    }
+    }
+    
+    //if polynomial 1 is non-empty add the remaining nodes to the sum 
+    while (poly1 != NULL)
+    {
+            
+    res->next = (struct node *)malloc(sizeof(struct node));;
+    res = res->next;
+    
+    res->co = poly1->co;
+    res->exp= poly1->exp;
+    poly1 = poly1->next;
+    }
+    
+    //if polynomial 2 is non-empty add the remaining nodes to the sum
+    while (poly2 != NULL)
+    {
+    res->next = (struct node *)malloc(sizeof(struct node));;
+    res = res->next;
+    
+    res->co = poly2->co;
+    res->exp = poly2->exp; 
+    poly2 = poly2->next;
+    }
+            
+    //set pointer of last node to null
+        res->next = NULL;
+            
+        //return the head node of the sum
+         return sum;
+    }
+            
+    //display polynomial
+    void display (struct node* head)
+    {
+    struct node *temp=head; 
+    while (temp != NULL)
+    {
+        printf("%d^%d+",temp->co,temp->exp);
+        temp=temp->next;
+    }
+    printf("\n");
+}
+            
+void main()
+{
+    //to store polynomial 1, polynomial 2 and the sum 
+    struct node *p1 = NULL, *p2 = NULL, *sum = NULL;
+    int ch, co, exp; 
+    int loop= 1;
+    while(loop) { 
+        printf("1. Add to Polynomial 1\n");
+        printf("2. Add to Polynomial 2\n");
+        printf("3. Perform Addition\n"); 
+        printf("4. Exit\n"); 
+        scanf("%d", &ch);
+        switch(ch)
+        {
+            case 1: printf("Enter co-efficient\n");
+                scanf("%d", &co);
+                printf("Enter exponent\n");
+                scanf("%d", &exp);
+                p1 = create(p1, co, exp);
+                break;
+    
+            case 2: printf("Enter co-efficient\n"); 
+                scanf("%d", &co); 
+                printf("Enter exponent\n"); 
+                scanf("%d", &exp); 
+                p2 = create(p2, co, exp);
+                break;
+                        
+            case 3: sum=polyAdd (p1, p2, sum); 
+                printf("\nPolynomial 1\n");
+                display(p1);
+                printf("\nPolynomial 2\n");
+                display(p2);
+                printf("\nSum: \n");
+                display (sum);
+                break;
+                        
+            case 4: loop = 0;
+                break;
+            default: printf("Wrong Choice! Re-enter\n");
+                break;
+        }
+    }
+}
+</textarea>
+                  
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

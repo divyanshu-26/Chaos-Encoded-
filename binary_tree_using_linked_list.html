@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Binary Tree using Linked List </title>
+    <style>
+        #tree_img{
+            margin-left: 18%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Binary Tree using Linked List</h1>
+        <div id="main_content">
+            <p class="code_description">
+                A binary tree is a tree data structure in which each <b>node</b> has at most two children, which are referred to as the <b>left child</b> and the <b>right child</b>.Every node excluding a root in a tree is connected by a directed edge from exactly one other node. This node is called a <b>parent</b>.
+            </p>
+            <p class="code_description">
+                On the other hand, each node can be connected to arbitrary number of nodes, called <b>children</b>. Nodes with no children are called <b>leaves</b>, or <b>external nodes</b>. Nodes which are not leaves are called <b>internal nodes</b>. Nodes with the same parent are called <b>siblings</b>. <br> In the linked list representation, we cannot directly access the children of the current node unless we traverse the list.
+            </p>
+            <ul class="code_description" type="disc">
+                <li>The depth of a node is the number of edges from the root to the node.</li>
+                <li>The height of a node is the number of edges from the node to the deepest leaf.</li>
+                <li>The height of a tree is a height of the root.</li>
+                <li> A full binary tree.is a binary tree in which each node has exactly zero or two children.</li>
+                <li>A complete binary tree is a binary tree, which is completely filled, with the possible exception of the bottom level, which is filled from left to right.</li>
+            </ul>
+
+            <h3 class="algo_subheads" style="text-decoration: underline;">Important terms :</h3>
+            <img id="tree_img" src="img\bin_tree_structure.webp" alt="Binary Tree Structure" width="50%">
+            <p class="code_description">
+                <ul class="code_description" type="disc">
+                    <li><b>Root</b> - The node at the top of the tree is called root. There is only one root per tree and one path from the root node to any node.</li>
+                    <li><b>Parent</b> - Any node except the root node has one edge upward to a node called parent.</li>
+                    <li><b>Child</b> - The node below a given node connected by its edge downward is called its child node.</li>
+                    <li><b>Leaf</b> - The node which does not have any child node is called the leaf node.</li>
+                    <li><b>Subtree</b> - Subtree represents  descendants of  node.</li>
+                </ul>
+            </p>
+            <h3 class="algo_subheads" style="text-decoration: underline;">Types of traversal :</h3>
+            <ul class="code_description">
+                <li> <b>Inorder</b> - (Left, Root, Right)
+                    <br>
+                    The left subtree is visited first, followed by the root, and finally the right subtree in this traversal strategy. Always keep in mind that any node might be a subtree in and of itself. The output of a binary tree traversal in order produces sorted key values in ascending order.
+                </li>
+                <li><b>Preorder</b> - (Root, Left, Right)
+                <br>
+                In this traversal method, the root node is visited first, then the left subtree, and finally the right subtree.</li>
+                <li><b>Postorder</b> - (Left, Right, Root)
+                    <br>The root node is visited last in this traversal method, hence the name. First, we traverse the left subtree, then the right subtree, and finally the root node.
+                </li>
+            </ul>
+           
+
+            
+            
+            
+            <h2 class="headings">Algorithm</h2>
+ <ol class="code_description">
+<li>Define Node class which has three attributes namely: <b>data left</b> and <b>right</b>. Here, left represents the left child of the node and right represents the right child of the node.</li>
+<li>When a node is created, data will pass to data attribute of the node and both left and right will be set to <b>null</b>.</li>
+<li>Define another class which has an attribute root. <br> <b>Root</b> represents the root node of the tree and initialize it to null.</li>
+<li>
+    <ol type="a">
+        <li>It checks whether the root is null, which means the tree is empty. It will add the new node as root.</li>
+        <li>Else, it will add root to the queue.</li>
+        <li>The variable node represents the current node.</li>
+        <li>First, it checks whether a node has a left and right child. If yes, it will add both nodes to queue.</li>
+        <li>If the left child is not present, it will add the new node as the left child.</li>
+        <li>If the left is present, then it will add the new node as the right child.</li>
+    </ol>
+</li>
+<li>Inorder() will display nodes of the tree in inorder fashion. <br> It traverses the entire tree then prints out left child followed by root then followed by the right child.</li>
+ </ol>
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//BINARY TREE IMPLEMENTATION AND TRAVERSAL (ALL THREE ORDERS) USING LINKED LIST
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+	int data;
+	struct node *left;
+	struct node *right;
+}node;
+
+node *create()
+{
+	node *p;
+	int x;
+	printf("Enter data(-1 for no data): ");
+	scanf("%d",&x);
+	if(x==-1)
+		return NULL;
+	p=(node*)malloc(sizeof(node));
+	p->data = x;
+	
+	printf("Enter left child of %d: \n",x);
+	p->left = create();
+	
+	printf("Enter right child of %d: \n",x);
+	p->right = create();
+	return p;
+}
+
+void preorder(node *t)
+{
+	if(t != NULL)
+	{
+		printf("\n%d", t->data);
+		preorder(t->left);
+		preorder(t->right);
+	}
+}
+
+void inorder(node *t)
+{
+	if(t != NULL)
+	{
+		inorder(t->left);
+		printf("\n%d",t->data);
+		inorder(t->right);
+	}
+}
+
+void postorder(node *t)
+{
+	if(t != NULL)
+	{
+		postorder(t->left);
+		postorder(t->right);
+		printf("\n%d",t->data);
+	}
+}
+
+void main()
+{
+	int ch;
+	node *root;
+	while(1)
+	{
+		printf("\nBinary Tree MENU\n==========\nPress 1 to Create.");
+		printf("\nPress 2 for Inorder Traversal.");
+		printf("\nPress 3 for Preorder Traversal.");
+		printf("\nPress 4 for Postorder Traversal.");
+		printf("\nPress 5 for Exit.");
+		printf("\nEnter your choice: ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				root=create();
+				break;
+			case 2:
+				inorder(root);
+				break;
+			case 3:
+				preorder(root);
+				break;
+			case 4:
+				postorder(root);
+				break;
+			case 5: exit(0);
+			default:
+				printf("\nInvalid choice.. Try Again..");				
+		}
+	}
+}
+
+</textarea>
+                  
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

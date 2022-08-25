@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Priority Queue Implementation</title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Priority Queue Implementation  </h1>
+        <div id="main_content">
+            <p class="code_description">
+                A priority queue is an abstract data type. It is a <b>special type of queue</b> in which each element is associated with a <b>priority value</b>. And, elements are served on the basis of their priority. That is, higher priority elements are served first.
+            </p>
+            <p class="code_description">
+                However, if elements with the same priority occur, they are served according to their order in the queue.
+            </p>
+            <p class="code_description">
+                The priority queue supports only comparable elements, which means that the elements are either arranged in an ascending or descending order.
+            </p>
+            <p class="code_description">
+                For example, suppose we have some values like 1, 3, 4, 8, 14, 22 inserted in a priority queue with an ordering imposed on the values is from least to the greatest. Therefore, the 1 number would be having the highest priority while 22 will be having the lowest priority.
+            </p>
+        
+            </p>
+            
+            <h2 class="headings">Algorithm</h2>
+            <h3 class= "algo_subheads">Operations associated with a priority queue in C :</h3>
+            <ul class="code_description" type="circle">
+                <li><b>isEmpty()</b>: To check if the queue is empty</li>
+                <li><b>isFull()</b>: To check whether the queue is full or not</li>
+                
+                <li><b>enqueue()</b>: add an item to the rear of the queue.
+                </li>
+                <li><b>dequeue()</b>: remove an item from the front of the queue.
+                </li>
+                <li><b>Peek</b>: get the element at front of the queue.</li>
+                
+            </ul>
+            <h3 class= "algo_subheads">Implementation of Priority Queue</h3>
+            <p class= "algo_subheads">
+                Priority queue can be implemented using an array, a linked list, a heap data structure, or a binary search tree. 
+             </p>
+           
+            <p class="code_description"> But here, we will be using the structure to implement the priority queue in this tutorial.</p>
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//PRIORITY QUEUE MENU DRIVEN
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 20
+void CQinsert(int[], int);
+int CQdelete(int []);
+int CQdisplay(int []);
+int front = -1, rear = -1;
+int main()
+{
+	int ch,x,CQ[MAX],item;
+	while(1)
+	{
+		printf("\n --- CIRCULAR QUEUE MENU --- \n 1. Insert\n 2. Delete\n 3. Display\n 4. Exit\n\n Enter your choice:- ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				printf("\nEnter the element to be inserted:- ");
+				scanf("%d",&x);
+				CQinsert(CQ,x);
+				break;
+			case 2: 
+				item = CQdelete(CQ);
+				if(item!=-1)
+					printf("\nThe deleted item is: %d\n",item)	;
+				break;
+			case 3:
+				CQdisplay(CQ);
+				break;
+			case 4: exit(0);
+			default: 
+				printf("\nInvalid Choice.\n");		
+		}
+	}
+}
+
+void CQinsert(int CQ[], int x)
+{
+    if(front == (rear+1)%MAX)
+    {
+        printf("\nOverflow - Queue is full.\n");
+        exit;
+    }
+    else if(front == -1)
+        front = rear = 0;
+    else
+        rear = (rear+1)%MAX;
+        CQ[rear] = x;
+}
+
+int CQdelete(int CQ[])
+{
+    int x;
+    if(front == -1)
+    {
+        printf("\nUnderflow - Queue is empty.\n");
+        return(-1);
+    }
+    else
+    {
+        x = CQ[front];
+        if(front == rear)
+            front = rear = -1;
+        else
+            front = (front +1)%MAX;
+            return x;        
+    }
+}
+
+int CQdisplay(int CQ[])
+{
+    int i;
+    if(front == -1)
+        printf("\nUnderflow - Queue is empty.\n");
+    else
+        {
+            if(front <= rear)
+            {
+                for(i = front; i<= rear; i++)
+                printf("%d\t",CQ[i]);
+        	}
+            else
+       		{
+                for(i=front; i< MAX; i++)
+                printf("%d\t",CQ[i]);
+                for(i=0; i<= rear; i++)
+                printf("%d\t",CQ[i]);
+            }
+        }
+}
+                  </textarea>
+                  
+                  <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

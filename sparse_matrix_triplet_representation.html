@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Triplet Representation of Sparse Matrix</title>
+    <style>
+        #matrix1{
+            margin-left: 150px;
+        }
+        #matrix2{
+            margin-left: 120px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Sparse matrix triplet representation</h1>
+        <div id="main_content">
+            <p class="code_description">
+                Matrix is defined with a 2-dimensional array that has row and column. An array which has <b>'m'</b> rows and <b>'n'</b> columns represent an <b>mXn</b> matrix. Sometimes it happens when a matrix has zero values is more than NON-ZERO values.
+                The matrix which has a greater number of ZERO values in comparison to the non-zero values is known as a <b>Sparse Matrix</b>.
+            </p>
+            <h2 class="headings">Sparse Matrix Representations</h2>
+            <p class="code_description">
+                A sparse matrix can be represented in two way:
+                <ol class="algopara" type="1">
+                    <li>Triplet Representation</li>
+                    <li>Linked Representation</li>
+                </ol>              
+</p>
+<p class="code_description" style="font-size: 150%;"><b>Triplet Representation</b></p>
+<p class="code_description">In Triplet Representation of a sparse matrix, we consider only non-zero values along with their row and column index values. The 0th row of the matrix stores the total number of rows, total number of columns, and total non-zero values.
+    <img id="matrix1"src="img\Sparse-Matrix.jpg" alt="sparse matrix" height="250px" width="250px">
+    <img id="matrix2"src="img\Triplet-Representation-of-sparse-matrix-1.jpg" alt=" triplet representation of sparse matrix" height="250px" width="250px">
+<p class="code_description">In the above example of the matrix, there are only five non-zero elements, those are 3, 8, 1, 3, 7, and matrix size is 4 X 4. We represent this matrix in triplet representation (row, column, value), as shown in the above image.</p>
+                   
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//SPARSE MATRIX TRIPLET REPRESENTATION
+#include<stdio.h>
+int main()
+    {
+        int s[50][50],t[50][3],nonzero,nrow,ncol,i,j,k;
+        printf("Enter the number of rows:- ");
+        scanf("%d",&nrow);
+        printf("Enter the number of column:- ");
+        scanf("%d",&ncol);
+        printf("Enter the sparse matrix:- ");
+        for( i = 0 ; i < nrow; i++)
+        {
+            for ( j = 0; j < ncol; j++)
+            {
+                scanf("%d",&s[i][j]);
+                if (s[i][j] != 0)
+                {
+                    nonzero++;
+                }
+                
+            }
+            
+        }
+        t[0][0] = nrow;
+        t[0][1] = ncol;
+        t[0][2] = nonzero;
+        k=1;
+        for ( i = 0; i < nrow; i++)
+        {
+            for ( j = 0; j < ncol; j++)
+            {
+                if(s[i][j] != 0)
+                {
+                    t[k][0] = i;
+                    t[k][1] = j;
+                    t[k][2] = s[i][j];
+                    k++;
+                }
+    
+            }
+            
+        }
+        printf("The triplet representation is :- ");
+        for ( i = 0; i < nrow; i++)
+        {
+            for ( j = 0; j < ncol; j++)
+            {
+                printf("%d\t",t[i][j]);
+            }
+             printf("\n");
+        } 
+    }
+                  </textarea>
+                  
+                  <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

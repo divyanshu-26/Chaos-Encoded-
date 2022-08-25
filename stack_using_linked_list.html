@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Stack using Linked List</title>
+    <style>
+        .stack_img{
+            margin-left: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Stack using Linked List </h1>
+        <div id="main_content">
+            <p class="code_description">
+                A stack is a linear data structure that follows the principle of <b>Last In First Out (LIFO)</b>. It is a collection of items of the same type. This means the last element inserted inside the stack is removed first.
+                Stack supports various operations like push, pop, peek, empty and size. It can be implemented using array and linked list. Benefit of implementing stack using linked list in C over arrays is that, it allows to grow the stack as per the requirements,i.e, memory can be allocated dynamically. <br>
+                <p class="code_description">
+                    A stack is represented using nodes of a linked list. Each node consists of two parts: data and next(storing address of next node). The data part of each node contains the assigned value and the next points to the node containing the next item in the stack. The top refers to the topmost node in the stack. Both the push() and pop() operations are carried out at the front/top of the linked list and hence takes O(1) time.
+                </p>
+                <p class="code_description">
+                    A stack can also be implemented using arrays. But arrays are of limited size and size of stack has to be predetermined whereas in a linked list implementation nodes can be added according to the user's requirements.
+                </p>
+                <p class="code_description">
+                    <h3 class= "algo_subheads">Basic Operations on Stack </h3>
+                    <p class="code_description">There are some basic operations that allow us to perform different actions on a stack.
+                        <ul class="code_description" type="circle">
+                            <li><b>Push:</b> Add an element to the top of a stack</li>
+                            <li><b>Pop:</b> Remove an element from the top of a stack</li>
+                            <li><b>IsEmpty:</b> Check if the stack is empty</li>
+                            <li><b>IsFull:</b> Check if the stack is full</li>
+                            <li><b>Peek:</b> Get the value of the top element without removing it</li>
+                        </ul>
+                    </p>
+                </p> 
+            </p>
+            <h2 class="headings">Algorithm</h2>
+            <p class="code_description">
+                In linked list implementation of stack, the nodes are maintained non-contiguously in the memory. Each node contains a pointer to its immediate successor node in the stack. Stack is said to be overflown if the space left in the memory heap is not enough to create a node.
+            </p>
+            <img class="stack_img" src="img\stack_using_LL.png" alt="Stack using Linked List" width="270">
+            <p class="code_description">
+                The top most node in the stack always contains null in its address field. Lets discuss the way in which, each operation is performed in linked list implementation of stack.
+            </p>
+            
+            
+            <h3 class="algo_subheads">The operations on Stack using Linked List </h3>
+            <h4 style="font-weight: bold;" class="code_description">&#9864; Adding a node to the stack (Push operation) :</h4> 
+            <p class="code_description">
+                Adding a node to the stack is referred to as <b>push</b> operation. Pushing an element to a stack in linked list implementation is different from that of an array implementation. In order to push an element onto the stack, the following steps are involved.
+                <ol class="code_description" type="1">
+                    <li>Create a node first and allocate memory to it.</li>
+                    <li>If the list is empty then the item is to be pushed as the start node of the list. This includes assigning value to the data part of the node and assign null to the address part of the node.</li>
+                    <li>If there are some nodes in the list already, then we have to add the new element in the beginning of the list (to not violate the property of the stack). For this purpose, assign the address of the starting element to the address field of the new node and make the new node, the starting node of the list.</li>
+                </ol>
+            </p>
+            <h4 style="font-weight: bold;" class="code_description">&#9864; Deleting a node from the stack (POP operation) :</h4> 
+            <p class="code_description">
+                Deleting a node from the top of stack is referred to as <b>pop</b> operation. Deleting a node from the linked list implementation of stack is different from that in the array implementation. In order to pop an element from the stack, we need to follow the following steps :
+                <ol class="code_description" type="1">
+                    <li><b>Check for the underflow condition</b> : The underflow condition occurs when we try to pop from an already empty stack. The stack will be empty if the head pointer of the list points to null.</li>
+                    <li><b>Adjust the head pointer accordingly</b> : In stack, the elements are popped only from one end, therefore, the value stored in the head pointer must be deleted and the node must be freed. The next node of the head node now becomes the head node.</li>
+                    
+                </ol>
+            </p>
+            <h4 style="font-weight: bold;" class="code_description">&#9864; Display the nodes (Traversing) :</h4> 
+            <p class="code_description">
+                Displaying all the nodes of a stack needs traversing all the nodes of the linked list organized in the form of stack. For this purpose, we need to follow the following steps :
+                <ol class="code_description" type="1">
+                    <li>Copy the head pointer into a temporary pointer.</li>
+                    <li>Move the temporary pointer through all the nodes of the list and print the value field attached to every node.</li>
+                    
+                </ol>
+            </p>
+
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//STACK USING LINKED LIST
+#include<stdio.h>
+#include<stdlib.h>
+void push(int);
+int pop ();\
+void display();
+struct node
+{
+	int info;
+	struct node *next;
+}*tos = NULL;
+int main()
+{
+	int ch, item;
+	while(1)
+	{
+		printf("\n\n1.Push\n2.Pop\n3.Display\n4.Exit\n\nEnter your choice: ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				printf("\nEnter the item: ");
+				scanf("%d",&item);
+				push(item);
+				break;
+			case 2: 
+				item=pop();
+				if(item!=1)
+					printf("\nThe Popped data item is: %d",item)	;
+				break;
+			case 3:
+				display();
+				break;
+			case 4: exit(0);
+			default: 
+				printf("Invalid Choice.");		
+		}
+	}
+}
+
+void push(int item)
+{
+	struct node *nw;
+	nw=(struct node*) malloc(sizeof(struct node));
+	nw->info = item;
+	nw->next = tos;
+	tos = nw;
+}
+
+int pop ()
+{
+	int item;
+	struct node *ptr;
+	if(tos == NULL)
+	{
+		printf("\nUnderflow");
+		return(-1);
+	}
+	else
+	{
+		ptr= tos;
+		item=tos -> info;
+		tos = tos -> next;
+		free(ptr);
+		return(item);
+	}
+}
+
+void display()
+{
+	struct node *curr;
+	if(tos == NULL)
+		printf("\nStack is Empty");
+	else
+	{
+		printf("\nThe Stack is : ");
+		curr = tos;
+		while(curr != NULL)
+		{
+			printf("%d<-",curr->info);
+			curr = curr->next;
+		}
+	}
+}
+                  </textarea>
+                  
+                  <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

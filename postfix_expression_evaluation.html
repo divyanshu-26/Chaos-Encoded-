@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Postfix Expression Evaluation | Stack</title>
+    <style>
+        .postfix_img{
+            margin-left: 11%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Postfix Expression Evaluation </h1>
+        <div id="main_content">
+            <p class="code_description">
+                The compiler finds it convenient to evaluate an expression in its postfix form. The virtues of postfix form include elimination of parentheses which signify priority of evaluation and the elimination of the need to observe rules of hierarchy, precedence and associativity during evaluation of the expression. 
+            </p>
+            <p class="code_description">
+                As <b>Postfix expression</b> is without parenthesis and can be evaluated as two operands and an operator at a time, this becomes easier for the compiler and the computer to handle 
+            </p>
+            <h3 class= "algo_subheads">Evaluation rule of a Postfix Expression states:</h3>
+            <ol class="algopara" type="1">
+                <li>While reading the expression from left to right, push the element in the stack if it is an operand.</li>
+                <li>Pop the two operands from the stack, if the element is an operator and then evaluate it.</li>
+                <li>Push back the result of the evaluation. Repeat it till the end of the expression.</li>    
+            </ol>
+            <h2 class="headings">Algorithm</h2>
+            <ol class="algopara" type="1">
+                <li> Create a stack to store operands (or values). </li>
+                <li>Scan the given expression and do the following for every scanned element.
+                    <ol type="a">
+                        <li>If the element is a number, push it into the stack </li>
+                        <li>If the element is an operator, pop operands for the operator from the stack. <br> Evaluate the operator and push the result back to the stack </li>
+                    </ol>
+                </li>
+                <li>When the expression is ended, the number in the stack is the final answer </li>
+            </ol>
+            <h3 class= "algo_subheads">Let's see an example to better understand the algorithm:</h3>
+            <p class="code_description"><b>Expression: 456*+</b></p>
+            <img class="postfix_img"src="img\post-fix-evolution.jpg" alt="Postfix Evolution" width="50%"><br>
+            <img class="postfix_img" src="img\post-fix-evolution-examplejpg.jpg" alt="Postfix Expression Evaluation " width="60%">
+
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//ITERATIVE BINARY SEARCH
+#include<stdio.h>     
+#include<conio.h>        
+#include<string.h>      
+#define MAX 50             
+int stack[MAX];             
+char post[MAX];             
+int top=-1;                  
+void pushstack(int tmp);       
+void evaluate(char c);          
+void main()
+    {
+       int i,l;
+       //clrscr();
+       printf("Insert a postfix notation :: ");
+       gets(post);                    
+       l=strlen(post);           
+       for(i=0;i<l;i++)
+       {
+          if(post[i]>='0' && post[i]<='9')
+          {
+              pushstack(i);           
+          }
+          if(post[i]=='+' || post[i]=='-' || post[i]=='*' ||
+          post[i]=='/' || post[i]=='^')       
+          {
+              evaluate(post[i]);  
+          }
+       }  
+       printf("\n\nResult :: %d",stack[top]);
+       getch();
+    }
+    
+    void pushstack(int tmp)          //definition for push
+    {
+       top++;                             
+       stack[top]=(int)(post[tmp]-48);    
+    }
+    
+    void evaluate(char c)       //evaluate function
+    {
+       int a,b,ans;    
+       a=stack[top];   
+       stack[top]='\0';   
+       top--;        
+       b=stack[top];         
+       stack[top]='\0';
+       top--;           
+       switch(c)  
+       {
+          case '+':      
+              ans=b+a;
+              break;
+          case '-':          
+              ans=b-a;
+              break;
+          case '*':            
+              ans=b*a;
+              break;
+          case '/':       
+              ans=b/a;
+              break;
+          case '^':
+              ans=b^a;
+              break;
+          default:
+              ans=0;
+       }
+       top++;          
+       stack[top]=ans;    
+    }
+                  </textarea>
+                  
+                  <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

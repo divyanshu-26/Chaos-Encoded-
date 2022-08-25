@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Operations on Single Linked List</title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Operations on Single Linked List </h1>
+        <div id="main_content">
+                <h3 class= "algo_subheads">Single Linked List :</h3>
+                <p class="code_description">
+                    Singly linked list is the most common linked list among the others. The singly linked list can be traversed only in one direction. It is a collection of ordered sets of elements. In singly linked list, Each node has a data and a pointer to the next node.
+                </p>
+            
+            <h2 class="headings">Algorithm</h2>
+            <h3 class= "algo_subheads">Construction of a single linked list :</h3>
+            <p class= "algo_subheads">
+                For constructing a singly linked list in C we make use of the structure keyword(struct), for creating user-defined data types, which can store various different types of data in the nodes of the singly linked list. 
+            </p>
+            <h2 class= "algo_subheads">Operations on a single linked list:</h2>
+            <h3 class= "algo_subheads">Node creation:</h3>
+            <p class= "algo_subheads">
+                Following is how we create a node for a linked list using structure in C: 
+            </p>
+            <pre class="code_description">
+        struct node   
+        {  
+            int data;   
+            struct node *next;  
+        };  
+        struct node *head, *ptr;   
+        ptr = (struct node *)malloc(sizeof(struct node *));
+            </pre>
+            <h3 class= "algo_subheads">Insertion:</h3>
+            <p class= "algo_subheads">
+                The insertion into a singly linked list can be performed at different positions. Based on the position of the new node being inserted, the insertion is categorized into the following categories.
+            </p>
+            <ol class="code_description" type="1">
+                <li><b>Insertion at beginning</b> - It involves inserting any element at the front of the list. We just need to a few link adjustments to make the new node as the head of the list.</li>
+                <li><b>Insertion at end of the list</b> - It involves insertion at the last of the linked list. The new node can be inserted as the only node in the list or it can be inserted as the last one. Different logics are implemented in each scenario.</li>
+                <li><b>Insertion after specified node</b> - It involves insertion after the specified node of the linked list. We need to skip the desired number of nodes in order to reach the node after which the new node will be inserted.</li>
+            </ol>
+
+            <h3 class= "algo_subheads">Deletion and Traversal:</h3>
+            <p class= "algo_subheads">
+                The Deletion of a node from a singly linked list can be performed at different positions. Based on the position of the node being deleted, the operation is categorized into the following categories.
+            </p>
+            <ol class="code_description" type="1">
+                <li><b>Deletion at beginning</b> - It involves deletion of a node from the beginning of the list. This is the simplest operation among all. It just need a few adjustments in the node pointers.</li>
+                <li><b>Deletion at the end of the list</b> - It involves deleting the last node of the list. The list can either be empty or full. Different logic is implemented for the different scenarios.</li>
+                <li><b>Deletion after specified node</b> - It involves deleting the node after the specified node in the list. we need to skip the desired number of nodes to reach the node after which the node will be deleted. This requires traversing through the list.</li>
+<li><b>Traversing</b> - 	In traversing, we simply visit each node of the list at least once in order to perform some specific operation on it, for example, printing data part of each node present in the list.</li>
+<li><b>Searching</b> - In searching, we match each element of the list with the given element. If the element is found on any of the location then location of that element is returned otherwise null is returned.</li>
+            </ol>
+            <p class= "algo_subheads">
+               In the following example we are going to see the above operations on a single linked list using structure in C.
+            </p>
+
+
+
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//SINGLE LINKED LIST IMPLEMENTATION
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int info;
+    struct node*next;
+};
+struct node*start=NULL,*nw,*curn,*prev;
+void insert();
+void delet();
+void display();
+main()
+    {
+        int ch,item;
+        while(1)
+        {
+            printf("\nMENU\n======\n1.INSERT\n2.DELETE\n3.DISPLAY\n4.EXIT\nEnter your choice: ");
+            scanf("%d",&ch);
+            switch(ch)
+            {
+                case 1:
+                insert();
+                break;
+                
+                case 2:delet();
+                            break;
+                
+                case 3:display();
+                break;
+                
+                case 4:exit(0);
+                default: printf("\n Invalid choice: Please try again...\n");
+            }
+        }
+    }
+    void insert()
+    {
+        int pos,n,i;
+        n=0;
+        printf("Enter the position: ");
+        scanf("%d",&pos);
+        curn=start;
+        while(curn!=NULL)
+        {
+            n++;
+            curn=curn->next;
+        }
+        if(pos<1||pos>n+1)
+        printf("Invalid position");
+        else
+        {
+            nw=(struct node*)malloc(sizeof(struct node));
+            printf("Enter info part: ");
+            scanf("%d",&nw->info);
+            nw->next=NULL;
+            if(pos==1)
+            {
+                nw->next=start;
+                start=nw;
+            }
+            else 	if(pos==n+1)
+            {
+                curn=start;
+                while(curn->next!=NULL)
+                curn=curn->next;
+                curn->next=nw;
+            }
+            else
+            {
+                i=1;
+                curn=start;
+                while(i<pos)
+                {
+                    prev=curn;
+                    curn=curn->next;
+                    i++;
+                }
+                nw->next=curn;
+                prev->next=nw;
+            }
+        }
+        
+    }
+    void delet()
+    {
+        int pos,n=0,i;
+        curn=start;
+        printf("Enter the position: ");
+        scanf("%d",&pos);
+        if(curn==NULL)
+        {
+            printf("Underflow");
+        }
+        else
+        {
+            while(curn!=NULL)
+            {
+            n++;
+            curn=curn->next;
+            }
+          if(pos<1 || pos>n)
+              {
+                printf("Invalid position");}
+          else
+          {
+              if(pos==1)
+              {
+                  curn=start;
+                  start=start->next;
+                  free(curn);
+              }
+              else if(pos==n)
+              {
+                  curn=start;
+                  while(curn->next!=NULL)
+                  {
+                      prev=curn;
+                      curn=curn->next;
+                  }
+                  prev->next=NULL;
+                  free(curn);
+              }
+           else
+           {
+                   i=1;
+                curn=start;
+                while(i<pos)
+                {
+                    prev=curn;
+                    curn=curn->next;
+                    i++;
+                }
+                prev->next=curn->next;
+                free(curn);
+           }
+        }	
+       }
+    }
+    void display()
+    {
+        curn=start;
+        while(curn!=NULL)
+        {
+            printf("%d->",curn->info);
+            curn=curn->next;
+        }	
+    }
+    
+    
+    
+</textarea>
+                  
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

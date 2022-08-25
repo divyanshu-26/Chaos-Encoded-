@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Bubble Sort | DSA</title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head">Bubble Sort </h1>
+        <div id="main_content">
+            <p class="code_description">
+                Bubble sort is a sorting algorithm that compares two adjacent elements and swaps them until they are in
+                the intended order.
+            </p>
+            <p class="code_description">
+                Just like the movement of air bubbles in the water that rise up to the surface, each element of the
+                array move to the end in each iteration. Therefore, it is called a bubble sort.
+            </p>
+            <p class="code_description">
+                Although it is simple to use, it is primarily used as an educational tool because the performance of
+                bubble sort is poor in the real world. It is not suitable for large data sets. The <b>average</b> and
+                <b>worst-case complexity</b> of Bubble sort is <b>O(n2)</b>, where <b>n</b> is a number of items.
+            </p>
+            <p class="code_description">
+                Bubble short is majorly used where -
+            <ul type="disc" class="code_description">
+                <li>Complexity does not matter.</li>
+                <li>Simple and short code is preferred.</li>
+            </ul>
+            </p>
+            <h2 class="headings">Working</h2>
+            <p class="code_description">
+                Suppose we are trying to sort the elements in <b>ascending order</b>.
+            <ol type="disc" class="code_description">
+                <li><b>First Iteration (Compare and Swap) :</b>
+                    <ol type="i">
+                        <li>Starting from the first index, compare the first and the second elements.</li>
+                        <li>If the first element is greater than the second element, they are swapped.</li>
+                        <li>Now, compare the second and the third elements. Swap them if they are not in order.</li>
+                        <li>The above process goes on until the last element.</li>
+                    </li>
+                </ol><br>
+<li><b>Remaining Iteration :</b>
+    <p>The same process goes on for the remaining iterations.
+        </p>
+    <p>After each iteration, the largest element among the unsorted elements is placed at the end.
+        </p>
+    <p>In each iteration, the comparison takes place up to the last unsorted element.
+        </p>
+    <p>The array is sorted when all the unsorted elements are placed at their correct positions.
+        </p>
+</li>
+</ol>    
+            </p>
+            <h2 class="headings">Algorithm</h2>
+            <p class="code_description">
+                In the algorithm given below, suppose <b>arr</b> is an array of <b>n</b> elements. The assumed swap function in the algorithm will swap the values of given array elements.
+            </p>
+<pre class="code_description">
+            begin BubbleSort(arr)  
+                for all array elements  
+                    if arr[i] > arr[i+1]  
+                        swap(arr[i], arr[i+1])  
+                    end if  
+                end for     
+                return arr     
+            end BubbleSort
+</pre>
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+                    <textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;">
+//BUBBLE SORT
+#include <stdio.h>
+
+// perform the bubble sort
+void bubbleSort(int array[], int size) {
+
+  // loop to access each array element
+  for (int step = 0; step < size - 1; ++step) {
+      
+    // loop to compare array elements
+    for (int i = 0; i < size - step - 1; ++i) {
+      
+      // compare two adjacent elements
+      // change > to < to sort in descending order
+      if (array[i] > array[i + 1]) {
+        
+        // swapping occurs if elements
+        // are not in the intended order
+        int temp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = temp;
+      }
+    }
+  }
+}
+
+// print array
+void printArray(int array[], int size) {
+  for (int i = 0; i < size; ++i) {
+    printf("%d  ", array[i]);
+  }
+  printf("\n");
+}
+
+int main() {
+  int data[] = {-2, 45, 0, 11, -9};
+  
+  // find the array's length
+  int size = sizeof(data) / sizeof(data[0]);
+
+  bubbleSort(data, size);
+  
+  printf("Sorted Array in Ascending Order:\n");
+  printArray(data, size);
+}
+</textarea>
+
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+
+                <!-- FOOTER STARTS -->
+                <footer>
+                    <div class="footer">
+
+                        <div class="first-content">
+                            <h3><a href="AboutUs.html">About Us</a></h3>
+                            <p>
+                                At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us
+                                needs helping hand.
+                                Delivering some relief in form solution to our problems makes us happy. We aim to be our
+                                users first
+                                thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                            </p>
+                        </div>
+
+                        <div class="middle-content">
+                            <a href="terms.html" style="margin: 5px;">Terms</a><br>
+
+                            <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+
+                            <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                                href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+
+                            <img src="img/phone_icon.png" alt="img" width="20px"
+                                style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a
+                                href="tel:+916234673424" style="float: left;margin-top: 30px;padding: 5px;">+91
+                                6234673424</a>
+
+                        </div>
+                        <div class="follow-us">
+                            <h3>Follow Us</h3>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                        </div>
+
+                        <div class="lower-footer">
+                            <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                        </div>
+
+                    </div>
+                </footer>
+                <!-- FOOTER ENDS -->
+</body>
+
+</html>

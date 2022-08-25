@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Operation on Stack</title>
+    <style>
+        #stack_img{
+            margin-left: 180px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Menu driven stack operations </h1>
+        <div id="main_content">
+            <p class="code_description">
+                A stack is a linear data structure that follows the principle of <b>Last In First Out (LIFO)</b>. It is a collection of items of the same type. This means the last element inserted inside the stack is removed first. <br>
+                <img id="stack_img"src="img\stack of plates.jpg" alt="stack of plates" width="250" height="250">
+                <p class="code_description">You can think of the stack data structure as the pile of plates on top of another. Here, you can:
+                    <ul class="code_description" type="circle">
+                        <li>Put a new plate on top</li>
+                        <li>Remove the top plate</li>
+                    </ul></p>
+                    <p class="code_description">
+                        <h3 class= "algo_subheads">Basic Operations on Stack </h3>
+                        <p class="code_description">There are some basic operations that allow us to perform different actions on a stack.
+                            <ul class="code_description" type="circle">
+                                <li><b>Push:</b> Add an element to the top of a stack</li>
+                                <li><b>Pop:</b> Remove an element from the top of a stack</li>
+                                <li><b>IsEmpty:</b> Check if the stack is empty</li>
+                                <li><b>IsFull:</b> Check if the stack is full</li>
+                                <li><b>Peek:</b> Get the value of the top element without removing it</li>
+                            </ul>
+                        </p>
+                    </p> 
+                    <p class="code_description">And, if you want the plate at the bottom, you must first remove all the plates on top. This is exactly how the stack data structure works.</p>
+                </p>
+                <h2 class="headings">Algorithm</h2>
+                <h3 class="algo_subheads">Working of Stack Data Structure :</h3>
+                <h4 style="font-weight: bold;" class="code_description">The operations work as follows:</h4>
+                <ol class="code_description" type="1">
+                    <li>&#160;&#160;A pointer called <b>TOP</b> is used to keep track of the top element in the stack.</li>
+                    <li>&#160;&#160;When initializing the stack, we set its value to <b>-1</b> so that we can check if the stack is empty by comparing <b>TOP==-1</b>.</li>
+                    <li>&#160;&#160;On pushing an element, we increase the value of <b>TOP</b> and place the new element in the position pointed to by <b>TOP</b>.</li>
+                    <li>&#160;&#160;On popping an element, we return the element pointed to by <b>TOP</b> and reduce its value.</li>
+                    <li>&#160;&#160;Before pushing, we check if the stack is already <b>full</b>.</li>
+                    <li>&#160;&#160;Before popping, we check if the stack is already <b>empty</b>.
+                    </li>
+                </ol>  
+                
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//MENU DRIVEN STACK OPERATIONS
+#include<stdio.h>
+#include<stdlib.h>
+#define max 10
+int tos = -1;
+void display(int[]);
+void push(int[], int);
+int pop(int[]);
+int main()
+    {
+        int item, choice, s[max], popped_element;
+        while(1)
+        {
+            printf("\n --- MENU --- \n 1. PUSH \n 2. POP \n 3. DISPLAY \n 4. EXIT \n Enter your choice :- ");
+            scanf("%d",&choice);
+            switch(choice)
+            {
+                case 1: printf("Enter the element to be pushed :- ");
+                        scanf("%d",&item);
+                        push(s, item);
+                        break;
+                case 2: popped_element = pop(s);
+                        if(popped_element != 1)
+                        printf("\nThe popped element is %d", popped_element);
+                        break;
+                case 3: display(s);
+                        break;
+                case 4: exit(0);
+                default : printf("\n\nInvalid choice, try again\n");
+            }
+        }
+    }
+    
+    void display(int s[])
+    {
+        int i;
+        if(tos == -1)
+        printf("\n\nUnderflow - The stack is empty\n");
+        else
+             printf("The stack is :- \n");
+        {
+            for( i = 0; i <= tos; i++ )
+            printf("%d\t",s[i]);
+        }
+    }
+    
+    void push(int s[], int item)
+    {
+        if(tos == max-1)
+            printf("\n\nOverflow - Stack is full\n");
+        else
+            {
+                tos = tos+1;
+                s[tos] = item;
+            }
+    }
+    
+    int pop(int s[])
+    {
+        int item;
+        if(tos == -1)
+        {
+            printf("\n\nUnderflow - Stack is empty\n");
+            return(-1);
+        }
+        else
+        {
+            item = s[tos];
+            tos--;
+            return(item);
+        }
+    }    
+                  </textarea>
+                  
+                  <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+                  <script>
+                      // HTML BOx JS Code
+                      let HTMLBox = document.getElementById("HTMLBox");
+                      let CopyButton = document.getElementById("CopyButton");
+      
+                      CopyButton.onclick = function () {
+                          HTMLBox.select();
+                          document.execCommand("copy");
+                          // HTMLButton.innerImg = "Codes Copied"
+                      }
+                  </script>
+                  </div>
+              </main>
+                  <!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

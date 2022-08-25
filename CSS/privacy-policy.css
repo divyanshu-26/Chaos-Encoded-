@@ -1,0 +1,53 @@
+main {
+    margin: 0 10% 3% 10%;
+    font-family: 'PT Serif', serif;
+    font-size: 16px;
+    text-align: justify;
+}
+
+main>h1 {
+    font-size: 60px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.slogan {
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 0 10px;
+}
+
+main>p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+.content {
+    line-height: 22px;
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x)/-2);
+    margin-left: calc(var(--bs-gutter-x)/-2);
+}
+
+.topic {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+#lower-content {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+small {
+    font-size: .875em;
+}

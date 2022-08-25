@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Merge Sort | DSA </title>
+    <style>
+        #merge_img {
+            margin-left: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head">Merge Sort </h1>
+        <div id="main_content">
+            <p class="code_description">
+                Merge Sort is one of the most popular sorting algorithms that is based on the principle of <b>Divide and Conquer</b> Algorithm.
+            </p>
+            <p class="code_description">
+          Here, a problem is <b>divided</b> into <b>multiple sub-problems</b>. Each sub-problem is solved individually. Finally, <b>sub-problems</b> are <b>combined</b> to form the <b>final solution</b>.
+            </p>
+            <img id="merge_img" src="img\merge-sort-example.webp" alt="infix to postfix example" width="50%">
+            <h2 class="headings">Divide and Conquer Strategy :</h2>
+            <p class="code_description">
+                Using the <b>Divide and Conquer</b> technique, we divide a problem into sub-problems. When the solution to each subproblem is ready, we 'combine' the results from the sub-problems to solve the main problem.
+            </p>
+            <p class="code_description">
+                Suppose we had to sort an array <b>A</b>. A subproblem would be to sort a sub-section of this array starting at index <b>p</b> and ending at index <b>r</b>, denoted as <b>A[p..r]</b>.
+            </p>
+            <h3 style="text-decoration: underline;" class="algo_subheads">Divide</h3>
+            <p class="code_description">
+                If <b>q</b> is the half-way point between <b>p</b> and <b>r</b>, then we can split the subarray <b>A[p..r]</b> into two arrays <b>A[p..q]</b> and <b>A[q+1, r]</b>.
+            </p>
+            <h3 style="text-decoration: underline;" class="algo_subheads">Conquer</h3>
+            <p class="code_description">
+                In the conquer step, we try to sort both the sub-arrays <b>A[p..q]</b> and <b>A[q+1, r]</b>. If we haven't yet reached the base case, we again divide both these sub-arrays and try to sort them.
+            </p>
+            <h3 style="text-decoration: underline;" class="algo_subheads">Combine</h3>
+            <p class="code_description">
+                When the conquer step reaches the base step and we get two sorted sub-arrays <b>A[p..q]</b> and <b>A[q+1, r]</b> for array <b>A[p..r]</b>, we combine the results by creating a sorted array <b>A[p..r]</b> from two sorted sub-arrays <b>A[p..q]</b> and <b>A[q+1, r]</b>
+            </p>
+            
+            <h2 class="headings">Algorithm</h2>
+            <p class="code_description">
+                In the following algorithm, <b>arr</b> is the given array, <b>beg</b> is the starting element, and <b>end</b> is the last element of the array. 
+            </p>
+            <pre class="code_description">
+                MERGE_SORT(arr, beg, end)  
+                
+                if beg < end  
+                set mid = (beg + end)/2  
+                MERGE_SORT(arr, beg, mid)  
+                MERGE_SORT(arr, mid + 1, end)  
+                MERGE (arr, beg, mid, end)  
+                end of if  
+                
+                END MERGE_SORT
+            </pre>
+            <p class="code_description">
+                The important part of the merge sort is the <b>MERGE function</b>. This function performs the merging of two sorted sub-arrays that are <b>A[beg…mid]</b> and <b>A[mid+1…end]</b>, to build one sorted array <b>A[beg…end]</b>. So, the inputs of the <b>MERGE</b> function are <b>A[]</b>, <b>beg</b>, <b>mid</b>, and <b>end</b>. 
+            </p>
+
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+                    <textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;">
+//MERGE SORT
+#include <stdio.h>  
+  
+    /* Function to merge the sub-arrays of a[] */  
+    void merge(int a[], int beg, int mid, int end)    
+    {    
+        int i, j, k;  
+        int n1 = mid - beg + 1;    
+        int n2 = end - mid;    
+          
+        int LeftArray[n1], RightArray[n2]; //temporary arrays  
+          
+        /* copy data to temp arrays */  
+        for (int i = 0; i < n1; i++)    
+        LeftArray[i] = a[beg + i];    
+        for (int j = 0; j < n2; j++)    
+        RightArray[j] = a[mid + 1 + j];    
+          
+        i = 0; /* initial index of first sub-array */  
+        j = 0; /* initial index of second sub-array */   
+        k = beg;  /* initial index of merged sub-array */  
+          
+        while (i < n1 && j < n2)    
+        {    
+            if(LeftArray[i] <= RightArray[j])    
+            {    
+                a[k] = LeftArray[i];    
+                i++;    
+            }    
+            else    
+            {    
+                a[k] = RightArray[j];    
+                j++;    
+            }    
+            k++;    
+        }    
+        while (i<n1)    
+        {    
+            a[k] = LeftArray[i];    
+            i++;    
+            k++;    
+        }    
+          
+        while (j<n2)    
+        {    
+            a[k] = RightArray[j];    
+            j++;    
+            k++;    
+        }    
+    }    
+      
+    void mergeSort(int a[], int beg, int end)  
+    {  
+        if (beg < end)   
+        {  
+            int mid = (beg + end) / 2;  
+            mergeSort(a, beg, mid);  
+            mergeSort(a, mid + 1, end);  
+            merge(a, beg, mid, end);  
+        }  
+    }  
+      
+    /* Function to print the array */  
+    void printArray(int a[], int n)  
+    {  
+        int i;  
+        for (i = 0; i < n; i++)  
+            printf("%d ", a[i]);  
+        printf("\n");  
+    }  
+      
+    int main()  
+    {  
+        int a[] = { 12, 31, 25, 8, 32, 17, 40, 42 };  
+        int n = sizeof(a) / sizeof(a[0]);  
+        printf("Before sorting array elements are - \n");  
+        printArray(a, n);  
+        mergeSort(a, 0, n - 1);  
+        printf("After sorting array elements are - \n");  
+        printArray(a, n);  
+        return 0;  
+    } 
+</textarea>
+
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+
+                <!-- FOOTER STARTS -->
+                <footer>
+                    <div class="footer">
+
+                        <div class="first-content">
+                            <h3><a href="AboutUs.html">About Us</a></h3>
+                            <p>
+                                At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us
+                                needs helping hand.
+                                Delivering some relief in form solution to our problems makes us happy. We aim to be our
+                                users first
+                                thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                            </p>
+                        </div>
+
+                        <div class="middle-content">
+                            <a href="terms.html" style="margin: 5px;">Terms</a><br>
+
+                            <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+
+                            <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                                href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+
+                            <img src="img/phone_icon.png" alt="img" width="20px"
+                                style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a
+                                href="tel:+916234673424" style="float: left;margin-top: 30px;padding: 5px;">+91
+                                6234673424</a>
+
+                        </div>
+                        <div class="follow-us">
+                            <h3>Follow Us</h3>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                        </div>
+
+                        <div class="lower-footer">
+                            <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                        </div>
+
+                    </div>
+                </footer>
+                <!-- FOOTER ENDS -->
+</body>
+
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Binary Search Tree using Linked List </title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Binary Search Tree using Linked List</h1>
+        <div id="main_content">
+            <p class="code_description">
+                Binary search tree is a data structure that quickly allows us to maintain a sorted list of numbers.
+            <ul class="code_description" type="disc">
+                <li>It is called a binary tree because each tree node has a maximum of two children.</li>
+                <li>It is called a search tree because it can be used to search for the presence of a number in
+                    <b>O(log(n))</b> time.
+                </li>
+            </ul>
+            </p>
+            <p class="code_description">
+                The properties that separate a binary search tree from a regular binary tree are :
+            </p>
+            <ul class="code_description" type="disc">
+                <li>All nodes of left subtree are less than the root node</li>
+                <li>All nodes of right subtree are more than the root node</li>
+                <li>Both subtrees of each node are also BSTs i.e. they have the above two properties</li>
+            </ul>
+
+            <h3 class="algo_subheads" style="text-decoration: underline;">Operations in Binary Search Tree:</h3>
+            <h4 class="algo_subheads" style="text-decoration: UNDERLINE;"> Search :</h4>
+            <p class="code_description">
+                The algorithm depends on the property of BST that if each left subtree has values below root and each
+                right subtree has values above the root.
+            </p>
+            <p class="code_description">
+                If the value is below the root, we can say for sure that the value is not in the right subtree; we need
+                to only search in the left subtree and if the value is above the root, we can say for sure that the
+                value is not in the left subtree; we need to only search in the right subtree.
+            </p>
+            <pre class="code_description">
+                If root == NULL 
+                return NULL;
+                If number == root->data 
+                    return root->data;
+                If number < root->data 
+                    return search(root->left)
+                If number > root->data 
+                    return search(root->right)
+            </pre>
+            <h3 class="algo_subheads" style="text-decoration: underline;">Insert :</h3>
+            <p class="code_description">
+                Inserting a value in the correct position is similar to searching because we try to maintain the rule
+                that the left subtree is lesser than root and the right subtree is larger than root.
+            </p>
+            <p class="code_description">
+                We keep going to either right subtree or left subtree depending on the value and when we reach a point
+                left or right subtree is null, we put the new node there.
+            </p>
+            <pre class="code_description">
+                if node == NULL 
+                    return createNode(data)
+                if (data < node->data)
+                    node->left  = insert(node->left, data);
+                else if (data > node->data)
+                    node->right = insert(node->right, data);  
+                return node;
+            </pre>
+
+            <h3 class="algo_subheads" style="text-decoration: underline;">Delete :</h3>
+            <p class="code_description">
+                There are three cases for deleting a node from a binary search tree.
+            </p>
+            <p class="code_description">
+                <b style="text-decoration: underline;">Case I</b> <br>
+                In the first case, the node to be deleted is the leaf node. In such a case, simply delete the node from
+                the tree.
+            </p>
+            <p class="code_description">
+                <b style="text-decoration: underline;">Case II</b> <br>
+                In the second case, the node to be deleted lies has a single child node. In such a case follow the steps
+                below:
+            <ol class="code_description" type="i">
+                <li>Replace that node with its child node.</li>
+                <li>Remove the child node from its original position.</li>
+            </ol>
+            </p>
+            <p class="code_description">
+                <b style="text-decoration: underline;">Case III</b> <br>
+                In the third case, the node to be deleted has two children. In such a case follow the steps below:
+            <ol class="code_description" type="i">
+                <li>Get the inorder successor of that node.</li>
+                <li>Replace the node with the inorder successor.</li>
+                <li>Remove the inorder successor from its original position.</li>
+            </ol>
+            </p>
+            <h2 class="headings">Algorithm</h2>
+            <ol type="1" class="code_description">
+                <li>Create a structure with an element (Element) and two pointers - <b>Left</b> and <b>Right</b> that
+                    points to the left and right <b>child node</b> respectively in the tree.</li>
+                <li>Create a new node using malloc function and assign the resultant pointer variable to the root node
+                    pointer <b>T</b> and assign it to <b>NULL</b>.</li>
+                <li><b>To insert a new element <b>X</b> into the tree:</b>
+                    <ul type="disc">
+                        <li>If the value of <b>T</b> is <b>NULL</b>, assign <b>T->Element</b> to <b>X</b>, and the
+                            <b>left</b> and <b>right</b> child pointers to <b>NULL</b> and exit the insertion operation.
+                        </li>
+                        <li>
+                            Otherwise if the element to be inserted is less than the root element <b>T</b>, repeat the
+                            step 3 recursively, with the new value of <b>T</b> as <b>T->Left</b>.
+                        </li>
+                        <li>
+                            Otherwise if the element to be inserted is more than the root element <b>T</b>, repeat the
+                            step 3 recursively, with the new value of <b>T</b> as <b>T->Right</b>.
+                        </li>
+                        <li>
+                            If the element is already present in the tree, do nothing.
+                        </li>
+                    </ul>
+                </li>
+                <li><b>To delete an element X from the tree:</b>
+                    <ul type="disc">
+                        <li>
+                            Find the node where the element resides.
+                        </li>
+                        <li>
+                            If the node has no left and right children, then the pointer to that node from the parent is
+                            changed to <b>NULL</b> and the node is freed of its memory.
+                        </li>
+                        <li>
+                            If the node has only one child, then the parent of the node is made to point to the child of
+                            the node and the node is freed.
+                        </li>
+                        <li>
+                            If the node has both left and right children:
+                            <ol type="i">
+                                <li>Look at the right subtree of the node (subtree rooted at the right child of the
+                                    node).</li>
+                                <li>Find the <b>Minimum</b> there.</li>
+                                <li>Replace the key of the node to be deleted by the minimum element.</li>
+                                <li>Delete the minimum element.</li>
+                            </ol>
+                        </li>
+                        <li>
+
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <b>To find an element X in the tree with root node T:</b>
+                    <ul type="disc">
+                        <li>If the root node <b>T</b> is initially <b>NULL</b>, then the tree is empty. So return
+                            <b>NULL</b> and <b>exit</b>.
+                        </li>
+                        <li>
+                            Take element <b>X</b> and compare it with the root node. If <b>X</b> is less than the
+                            element found at the root node, then repeat step 5 recursively with the new value of
+                            <b>T</b> as <b>T->Left</b>. Take element <b>X</b> and compare it with the root node. If
+                            <b>X</b> is more than the element found at the root node, then repeat step 5 recursively
+                            with the new value of <b>T</b> as <b>T->Right</b>.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <b>To find the minimum element in a tree with root node T:</b>
+                    <ul type="disc">
+                        <li>If <b>T</b> is
+                            <b>NULL</b> <b>return NULL</b>.
+                        </li>
+                        <li>Otherwise slide the value of <b>T</b> to <b>T->Left</b> until <b>T->Left</b> becomes
+                            <b>NULL</b>.
+                        </li>
+                        <li>Return the value of T.</li>
+                    </ul>
+                </li>
+                <li><b>To find the maximum element in a tree with root node T:</b>
+                    <ul type="disc">
+                        <li>If <b>T</b> is <b>NULL</b> <b> return NULL</b>.</li>
+                        <li>Otherwise, slide the value of <b>T</b> to <b>T->Right</b> until <b>T->Right</b> becomes
+                            <b>NULL</b>.
+                        </li>
+                        <li>Return the value of <b>T</b>.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+                    <textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;">
+//BINARY SEARCH TREE USING LINKED LIST
+#include <stdio.h>
+#include <stdlib.h>
+
+struct treeNode 
+{
+    int data;
+    struct treeNode *left, *right;
+};
+
+struct treeNode *root = NULL;
+
+//create bst node function
+struct treeNode* createNode(int data) 
+{
+    struct treeNode *newNode;
+    newNode = (struct treeNode *) malloc(sizeof (struct treeNode));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return(newNode);
+}
+
+//function to insert into BST
+void insertion(struct treeNode **node, int data) 
+{
+    if (*node == NULL) 
+	{
+    	*node = createNode(data);
+    } 
+	else if (data < (*node)->data) 
+	{
+        insertion(&(*node)->left, data);
+    }
+	else if (data > (*node)->data) 
+	{
+        insertion(&(*node)->right, data);
+    }
+}
+
+
+//Function for inorder traversal left-root-right
+void intraverse(struct treeNode *node) 
+{
+    if (node != NULL) 
+	{
+        intraverse(node->left);
+        printf("%3d\t", node->data);
+        intraverse(node->right);
+    }
+    return;
+}
+//Function for preorder traversal root-left-right
+void pretraverse(struct treeNode *node) 
+{
+    if (node != NULL) 
+	{
+        printf("%3d\t", node->data);
+        pretraverse(node->left);
+        pretraverse(node->right);
+    }
+	return;
+}
+//Function for postorder traversal left-right-root 
+void posttraverse(struct treeNode *node) 
+{
+    if (node != NULL) 
+	{
+        posttraverse(node->left);
+        posttraverse(node->right);
+        printf("%3d\t", node->data);
+    }
+    return;
+}
+int main() 
+{
+    int data, ch;
+    while (1) 
+	{
+        printf("BINARY SEARCH TREE \nMENU\n============\n");
+        printf("1. Insertion in Binary Search Tree\n");
+        printf("2. Inorder traversal\n");
+        printf("3. Preorder traversal\n");
+        printf("4. Postorder traversal\n5. Exit\n");
+        printf("Enter your choice:");
+        scanf("%d", &ch);
+        switch (ch) 
+		{
+            case 1:
+                while (1) 
+				{
+                	printf("Enter your data:");
+                    scanf("%d", &data);
+                    insertion(&root, data);
+                    printf("Do U want more  Insertion?(enter 0 for no/1 for yes ):");
+        			scanf("%d", &ch);
+                    if (!ch)
+                    	break;
+                }
+                break;
+            case 2:
+                printf("Inorder Traversal:\n");
+                intraverse(root);
+				printf("\n");
+                break;
+            case 3:
+                printf("Preorder Traversal:\n");
+                pretraverse(root);
+                printf("\n");
+                break;
+			case 4:
+                printf("Postorder Traversal:\n");
+                posttraverse(root);
+				printf("\n");
+                break;		      
+            case 5:
+                exit(0);
+            default:
+                printf("u've entered wrong option\n");
+                break;
+        }
+    }
+    return 0;
+}
+</textarea>
+
+            <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+                    <script>
+                        // HTML BOx JS Code
+                        let HTMLBox = document.getElementById("HTMLBox");
+                        let CopyButton = document.getElementById("CopyButton");
+        
+                        CopyButton.onclick = function () {
+                            HTMLBox.select();
+                            document.execCommand("copy");
+                            // HTMLButton.innerImg = "Codes Copied"
+                        }
+                    </script>
+                    </div>
+                </main>
+                    <!-- BODY ENDS -->
+
+
+                <!-- FOOTER STARTS -->
+                <footer>
+                    <div class="footer">
+
+                        <div class="first-content">
+                            <h3><a href="AboutUs.html">About Us</a></h3>
+                            <p>
+                                At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us
+                                needs helping hand.
+                                Delivering some relief in form solution to our problems makes us happy. We aim to be our
+                                users first
+                                thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                            </p>
+                        </div>
+
+                        <div class="middle-content">
+                            <a href="terms.html" style="margin: 5px;">Terms</a><br>
+
+                            <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+
+                            <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                                href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+
+                            <img src="img/phone_icon.png" alt="img" width="20px"
+                                style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a
+                                href="tel:+916234673424" style="float: left;margin-top: 30px;padding: 5px;">+91
+                                6234673424</a>
+
+                        </div>
+                        <div class="follow-us">
+                            <h3>Follow Us</h3>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                        </div>
+
+                        <div class="lower-footer">
+                            <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                        </div>
+
+                    </div>
+                </footer>
+                <!-- FOOTER ENDS -->
+</body>
+
+</html>

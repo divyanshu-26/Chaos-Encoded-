@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Doubly Linked List </title>
+    <style>
+        #dll_img{
+            margin-left:27%;
+        }
+        #dll_img1{
+            margin-left:10%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Doubly Linked List Implementation  </h1>
+        <div id="main_content">
+            <p class="code_description">
+                Doubly Linked List (DLL) is a complex data structure and an advanced version of a simple linked list in which the node has a pointer to the next node only. As we can traverse the elements in only one direction, reverse traversing is not possible. To solve this problem, a doubly-linked list came into the picture as each node contains the address of the previous and next node, so both the forward and backward traversing of the list is possible. So every node in a doubly-linked list contains 3 parts, i.e., the node which stores the actual item and the other parts contain the pointers containing the address of the previous and next node in the sequence. In this topic, we are going to learn about the Doubly linked list in C.
+            </p>
+            <p class="code_description">
+                A Doubly Linked List is a unique type of Data Structure where there are a chain of nodes, that are connected to one another using pointers, where any individual node has 3 components -
+                <ol class="code_description" type="1">
+                    <li><b>Data</b> - <em>*prev</em></li>
+                    <li><b>Previous Pointer</b> - <em>data</em></li>
+                    <li><b>Next Pointer</b> - <em>*next</em></li>
+                </ol>
+
+                   
+                <img id="dll_img"src="img\dll-node.webp" alt="DLL Node" width="350"> <br>
+                <p class="code_description">
+                    For any node, its previous pointer contains the address of the previous node and the next pointer contains the address of the next node in the chain of nodes.
+                </p>   
+            </p>
+            <p class="code_description">
+                Following is a Doubly Linked List representation.
+            </p>
+            <img id="dll_img1"src="img\doubly-linked-list-created.webp" alt="DLL Node" width="75%">
+
+            
+                
+      
+            <h2 class="headings">Algorithm</h2>
+            <h3 class="algo_subheads" style="text-decoration: underline;">Operations on Doubly Linked List</h3>
+            <h3 class= "algo_subheads">Node creation :</h3>
+            <pre class="code_description">
+                struct node   
+                {  
+                    struct node *prev;  
+                    int data;  
+                    struct node *next;  
+                };  
+                struct node *head;  
+            </pre>
+           
+            <h3 class= "algo_subheads">Other Operations :</h3>
+            <ol class="code_description">
+                <li><b>Insertion at beginning</b> - Adding the node into the linked list at beginning.</li>
+                <li><b>Insertion at end</b> - Adding the node into the linked list to the end.</li>
+                <li><b>Insertion after specified node</b> - Adding the node into the linked list after the specified node.</li>
+                <li><b>	Deletion at beginning</b> - Removing the node from beginning of the list</li>
+                <li><b>Deletion at the end</b> - Removing the node from end of the list.</li>
+                <li><b>Deletion of the node having given data</b> - Removing the node which is present just after the node containing the given data.</li>
+                <li><b>	Searching</b> - Comparing each node data with the item to be searched and return the location of the item in the list if the item found else return null.</li>
+                <li><b>Traversing</b> - 	Visiting each node of the list at least once in order to perform some specific operation like searching, sorting, display, etc.</li>
+            </ol>
+         
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//DOUBLY LINKED LIST IMPLEMENTATION
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+struct node
+{
+int info;
+struct node *next, *prev;
+};
+struct node *start=NULL, *end=NULL;
+void ins_at_any_pos(int);
+void del_at_any_pos(int);
+void display();
+void main()
+    {
+        int ch, pos;
+        while (1)
+        {
+            printf("\nMENU\n1. Insert\n2. Delete\n3. Display\n4. Exit\nEnter your choice: ");
+            scanf("%d",&ch);
+            switch(ch)
+            {
+                case 1:
+                    printf("Enter the position: ");
+                    scanf("%d",&pos);
+                    ins_at_any_pos(pos);
+                    break;
+                case 2:
+                    printf("Enter the position: ");
+                    scanf("%d",&pos);
+                    del_at_any_pos(pos);
+                    break;
+                case 3:
+                    display();
+                    break;		
+                case 4: exit(0);
+                default: printf("Wrong choice\n");	
+            }
+        }
+    }
+    
+    void ins_at_any_pos(int num)
+    {
+        struct node *curr, *t, *new_node;
+        int n=1;
+        new_node=(struct node*)malloc(sizeof(struct node));
+        printf("Enter into the info part of the node: ");
+        scanf("%d",&new_node->info);
+        if(num==1)
+        {
+            new_node->next=start;
+            new_node->prev=NULL;
+            if(start==NULL)
+                start =end=new_node;
+            else
+            {
+                start->prev=new_node;
+                start=new_node;
+            }
+            return;
+        }
+        curr=start;
+        while(curr !=NULL && n<num)
+        {
+            t=curr;
+            curr=curr->next;
+            n++;
+        }
+        if(n==num && curr != NULL)
+        {
+            new_node->next=curr;
+            new_node->prev=t;
+            t->next=new_node;
+            curr->prev=new_node;
+            return;
+        }
+        if(n==num && curr == NULL)
+        {
+            t->next=new_node;
+            new_node->next=NULL;
+            new_node->prev=t;
+            end = new_node;
+        }
+        else
+            printf("Invalid position\n");
+    }
+    
+    void display()
+    {
+        struct node *curr = start;
+        printf("The Doubly linked list: Start->");
+        while(curr != NULL)
+        {
+            printf("%d<->",curr->info);
+            curr=curr->next;
+        }
+        printf("End\n");
+        printf("\nThe reverse of the linked list list is: End->");
+        curr=end;
+        while(curr != NULL)
+        {
+            printf("%d<->",curr->info);
+            curr=curr->prev;
+        }
+        printf("START\n");
+    }
+    
+    void del_at_any_pos(int num)
+    {
+        struct node *t;
+        int n=1;
+        if(start == NULL)
+            printf("Underflow!\n");
+        else
+        {
+            t=start;
+            if(num==1)
+            {
+                start =start->next;
+                start->prev=NULL;
+                free(t);
+                if(start == NULL)
+                    end=NULL;
+            }
+            else
+            {
+                while(t!=NULL && n<num)
+                {
+                    t=t->next;
+                    n++;
+                }
+                if(t!=NULL && n==num)
+                {
+                    t->prev->next = t->next;
+                    if(t->next==NULL)
+                        end = t->prev;
+                    else
+                        t->next->prev = t->prev;
+                    free(t);		
+                }
+                else
+                    printf("Node not found. Invalid num!!\n");
+            }
+        }	
+    }
+</textarea>
+                  
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

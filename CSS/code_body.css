@@ -1,0 +1,86 @@
+main {
+  margin: 0 10% 10% 4%;
+  font-family: 'PT Serif', serif;
+  text-align: justify;
+}
+
+.main_head {
+  margin-top: 70px;
+  font-size: 35px;
+  margin-left: 10%;
+}
+
+.headings {
+  margin-top: 40px;
+  font-size: 27px;
+  margin-left: 10%;
+}
+
+.code_description {
+  line-height: 30px;
+  margin-top: 15px;
+  font-size: 20px;
+  margin-left: 10%;
+  margin-right: 4%;
+}
+
+.algo_subheads {
+  margin-top: 20px;
+  font-size: 21px;
+  margin-left: 10.5%;
+  margin-right: 5%;
+}
+
+.algopara {
+  line-height: 30px;
+  font-size: 19px;
+  margin-left: 11%;
+  margin-right: 5%;
+}
+
+
+
+/* Copy Button */
+/* Google Font CDN Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+#CopyButton {
+  float: left;
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 5px;
+  height: 35px;
+  width: 35px;
+  color: #fff;
+  background: #d1cfcf;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+#CopyButton:hover {
+  background: #606062;
+}
+
+@media (max-width: 400px) {
+  #CopyButton {
+    width: 100%;
+
+  }
+}
+
+/* TEXT BOX */
+
+#HTMLBox {
+  float: left;
+  margin-top: 15px;
+  margin-left: 10%;
+  margin-right: 0;
+  margin-bottom: 150px;
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+

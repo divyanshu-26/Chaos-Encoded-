@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Operations on Array</title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head">Menu Driven Array Operations</h1>
+        <div id="main_content">
+            <p class="code_description">
+                Here, we will write a single Menu Driven Program for the operations - <br>  Insert, Delete, Traverse and Merge upon an array in C Language.
+            </p>
+            <h2 class="headings">Algorithm</h2>
+            <p class="code_description">
+                <h4  class="algo_subheads">Insertion</h4>
+                <ol class="algopara" type="1">
+                    <li>Input the array elements, the position of the new element to be inserted and the new element.</li>
+                    <li>Insert the new element at that position and shift the rest of the elements to right by one position.</li>
+                </ol>
+                <h4 class="algo_subheads">Deletion</h4>
+                <ol class="algopara" type="1">
+                    <li>Input the array elements, the position of the new element to be inserted and the new element.</li>
+                <li>Delete the element and shift the rest of the elements to left by one position.</li>
+            </ol>
+                <h4 class="algo_subheads">Traversal</h4>
+                <ol class="algopara" type="1">
+                    <li>Start a loop from 0 to N-1, where N is the size of array. </li>
+                    <li>Access every element of array with help of </li>
+                    <li>Print the elements.</li>
+                </ol>
+                <h4 class="algo_subheads">Merging</h4>
+                <ol class="algopara" type="1">
+                <li>To merge any two array in C programming, start adding each and every element of the first array to the third array (target array).
+                </li>
+                <li> Then start appending each and every element of the second array to the third array (target array) as shown in the program given below.</li>
+            </ol>
+            </p>
+                
+            <h2 class="headings">Program using C</h2>
+
+
+            <!-- CODE BOX -->
+
+
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//MENU DRIVEN ARRAY OPERATIONS
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+void main()
+    {
+        int A[10],B[10],C[20],m,k;
+        int n,i,x,p,ch;
+        printf("Enter the no. of elements:");
+        scanf("%d",&n);
+        printf("Enter the elements:");
+        for(i=0;i<n;i++)
+            {
+                scanf("%d",&A[i]);
+            }
+        while(1)
+        {
+            printf("\nMENU\n======\n1.INSERT\n2.DISPLAY\n3.DELETE\n4.MERGE\n5.EXIT");
+            printf("\nEnter the choice: ");
+            scanf("%d",&ch);
+            switch(ch)
+            {
+                case 1:
+                    printf("Enter the position:");
+                    scanf("%d",&p);
+                    printf("Enter the element:");
+                    scanf("%d",&x);
+                    for(i=n;i>=p;i--)
+                        A[i]=A[i-1];
+                    A[p-1]=x;
+                    n=n+1;
+                    break;
+                case 2:
+                    printf("Array: ");
+                    for(i=0;i<n;i++)
+                    {
+                        printf("%d\t",A[i]);
+                    }
+                    break;
+                case 3:
+                    printf("Enter posititon:");
+                    scanf("%d",&p);
+                    if(n==1)
+                        n=0;
+                    else
+                        {
+                            for(i=p-1;i<n-1;i++)
+                            {
+                                A[i]=A[i+1];
+                            }
+                                n=n-1;
+                        }	
+                    break;
+                case 4:
+                    printf("Enter the size of 2nd array:");
+                    scanf("%d",&m);
+                    printf("Enter the element:");
+                    for(i=0;i<m;i++)
+                        scanf("%d",&B[i]);
+                    k=0;
+                    for(i=0;i<n;i++)
+                    {
+                        C[k]=A[i];
+                        k++;
+                    }	
+                    for(i=0;i<m;i++)
+                    {
+                        C[k]=B[i];
+                        k++;
+                    }
+                    printf("The merged Array is: ");
+                    for(i=0;i<m+n;i++)
+                    printf("%d\t",C[i]);
+                    break;
+                case 5: exit (0);	
+            }
+        }
+    }
+    
+   
+                  </textarea>
+                  
+                  <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+            <script>
+                // HTML BOx JS Code
+                let HTMLBox = document.getElementById("HTMLBox");
+                let CopyButton = document.getElementById("CopyButton");
+
+                CopyButton.onclick = function () {
+                    HTMLBox.select();
+                    document.execCommand("copy");
+                    // HTMLButton.innerImg = "Codes Copied"
+                }
+            </script>
+            </div>
+        </main>
+            <!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

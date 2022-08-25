@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Queue using Linked List</title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Queue using Linked List </h1>
+        <div id="main_content">
+            <p class="code_description">
+                The major problem with the queue implemented using an array is, It will work for an only fixed number of
+                data values. That means, the amount of data must be specified at the beginning itself. Queue using an
+                array is not suitable when we don't know the size of data which we are going to use.
+            </p>
+            <p class="code_description">
+                A queue data structure can be implemented using a linked list data structure. The queue which is
+                implemented using a linked list can work for an unlimited number of values. That means, queue using
+                linked list can work for the variable size of data (No need to fix the size at the beginning of the
+                implementation). The Queue implemented using linked list can organize as many data values as we want.
+            </p>
+            <p class="code_description">
+                In linked list implementation of a queue, the last inserted node is always pointed by <b>'rear'</b> and
+                the first node is always pointed by <b>'front'</b>.
+            </p>
+
+            <!-- algorithm section -->
+
+
+            <h2 class="headings">Algorithm</h2>
+            <h3 class="algo_subheads">Node structure for Queue :</h3>
+            <pre class="code_description">
+        struct node
+        {
+            int data;
+            struct node *next;
+        };
+            </pre>
+            <h3 class="algo_subheads">To point the front and rear node :</h3>
+            <pre class="code_description">
+    struct node *front = NULL, *rear = NULL;
+            </pre>
+            <h3 class="algo_subheads">Enqueue function :</h3>
+            <p class="code_description">Enqueue function will add the element at the end of the linked list.
+                <br>
+                Using the rear pointer, we can track the last inserted element.
+            </p>
+            <ol class="code_description" type="1">
+                <li>Declare a new node and allocate memory for it</li>
+                <li>If <b>front == NULL</b>,
+
+                    make both front and rear points to the new node.</li>
+                <li> Otherwise,add the new node in <b>rear->next</b>. <br>
+                    make the new node as the rear node. i.e. <b>rear = new node</b></li>
+            </ol>
+            <pre class="code_description">
+        void enqueue(int val)
+        {
+            struct node *newNode = malloc(sizeof(struct node));
+            newNode->data = val;
+            newNode->next = NULL;
+
+            //if it is the first node
+            if(front == NULL && rear == NULL)
+                //make both front and rear points to the new node
+                front = rear = newNode;
+            else
+            {
+                //add newnode in rear->next
+                rear->next = newNode;
+
+                //make the new node as the rear node
+                rear = newNode;
+            }
+        }
+            </pre>
+            <h3 class="algo_subheads">Dequeue function :</h3>
+            <p class="code_description">Dequeue function will remove the first element from the queue.
+            </p>
+            <ol class="code_description" type="1">
+                <li>Check whether the queue is empty or not</li>
+                <li>If it is the empty queue <b>(front == NULL)</b>
+                    We can't dequeue the element.</li>
+                <li> Otherwise,
+                    Make the front node points to the next node. i.e <b>front = front->next;</b>
+                    if front pointer becomes <b>NULL</b>, set the rear pointer also <b>NULL</b>.
+
+                    Free the front node's memory.</li>
+            </ol>
+            <pre class="code_description">
+        void dequeue()
+        {
+            //used to freeing the first node after dequeue
+            struct node *temp;
+
+            if(front == NULL)
+                printf("Queue is Empty. Unable to perform dequeue\n");
+            else
+            {
+                //take backup
+                temp = front;
+
+                //make the front node points to the next node
+                //logically removing the front element
+                front = front->next;
+
+                //if front == NULL, set rear = NULL
+                if(front == NULL)
+                    rear = NULL;
+
+            //free the first node
+            free(temp);
+            }
+        }
+            </pre>
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+            <textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;">
+// QUEUE USING LINKED LIST
+#include<stdio.h>
+#include<stdlib.h>
+void insert(int);
+int del ();
+void display();
+struct node
+{
+	int info;
+	struct node *next;
+}*front = NULL, *rear = NULL;
+int main()
+{
+	int ch, item;
+	while(1)
+	{
+		printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\n\nEnter your choice: ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				printf("\nEnter the item: ");
+				scanf("%d",&item);
+				insert(item);
+				break;
+			case 2: 
+				item=del();
+				if(item!=-1)
+					printf("\nThe deleted item is: %d",item)	;
+				break;
+			case 3:
+				display();
+				break;
+			case 4: exit(0);
+			default: 
+				printf("Invalid Choice.");		
+		}
+	}
+}
+void insert(int item)
+{
+	if(rear == NULL)
+	{
+		struct node *nw;
+		rear= (struct node*) malloc (sizeof(struct node));
+		rear -> info=item;
+		rear -> next= NULL;
+		front = rear;
+	}
+	else
+	{
+		rear -> next = (struct node*) malloc(sizeof(struct node));
+		rear =rear -> next;
+		rear -> info = item;
+		rear -> next = NULL; 
+	}
+}
+int del ()
+{
+	int item;
+	struct node *ptr;
+	if(front == NULL)
+	{
+		printf("\nQueue is empty");
+		return (-1);
+	}
+	else
+	{
+		ptr= front;
+		item=front -> info;
+		front = front -> next;
+		free(ptr);
+		if(front == NULL)
+	     	rear=NULL;
+		return(item);
+	}
+}
+void display()
+{
+	struct node *ptr = front;
+	if(rear == NULL)
+		printf("\nQueue is Empty");
+	else
+	{
+		printf("\nThe Queue is : ");
+		while(ptr != NULL)
+		{
+			printf("%d\t",ptr->info);
+			ptr = ptr->next;
+		}
+	}
+}
+</textarea>
+
+            <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+            <script>
+                // HTML BOx JS Code
+                let HTMLBox = document.getElementById("HTMLBox");
+                let CopyButton = document.getElementById("CopyButton");
+
+                CopyButton.onclick = function () {
+                    HTMLBox.select();
+                    document.execCommand("copy");
+                    // HTMLButton.innerImg = "Codes Copied"
+                }
+            </script>
+        </div>
+    </main>
+    <!-- BODY ENDS -->
+
+
+    <!-- FOOTER STARTS -->
+    <footer>
+        <div class="footer">
+
+            <div class="first-content">
+                <h3><a href="AboutUs.html">About Us</a></h3>
+                <p>
+                    At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping
+                    hand.
+                    Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                    thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                </p>
+            </div>
+
+            <div class="middle-content">
+                <a href="terms.html" style="margin: 5px;">Terms</a><br>
+
+                <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+
+                <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                    href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+
+                <img src="img/phone_icon.png" alt="img" width="20px"
+                    style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                    style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+
+            </div>
+            <div class="follow-us">
+                <h3>Follow Us</h3>
+
+                <div class="icon">
+                    <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                </div>
+
+                <div class="icon">
+                    <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                </div>
+
+                <div class="icon">
+                    <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                </div>
+
+                <div class="icon">
+                    <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                </div>
+
+            </div>
+
+            <div class="lower-footer">
+                <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+            </div>
+
+        </div>
+    </footer>
+    <!-- FOOTER ENDS -->
+</body>
+
+</html>

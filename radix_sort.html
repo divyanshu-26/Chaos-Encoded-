@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Radix Sort | DSA </title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head">Radix Sort </h1>
+        <div id="main_content">
+            <p class="code_description">
+                Radix sort is a sorting algorithm that sorts the elements by first grouping the individual digits of the same <b>place value</b>. Then, sort the elements according to their increasing/decreasing order. 
+            </p>
+            <p class="code_description">
+                Suppose, we have an array of 8 elements. First, we will sort elements based on the value of the unit place. Then, we will sort elements based on the value of the tenth place. This process goes on until the last significant place.
+            </p>
+           
+            <h2 class="headings">Working :</h2>
+            <ol type="1" class="code_description" >
+                <li>Find the largest element in the array, i.e. <b>max</b>. Let <b>X</b> be the number of digits in <b>max</b>. <b>X</b> is calculated because we have to go through all the significant places of all elements.</li>
+                <li>Now, go through each significant place one by one.
+<br>
+                    Use any stable sorting technique to sort the digits at each significant place. We have used counting sort for this.
+                    <br>
+                    Sort the elements based on the unit place digits (<b>X=0</b>).</li>
+                <li>Now, sort the elements based on digits at tens place.</li>
+                <li>Finally, sort the elements based on the digits at hundreds place.</li>
+            </ol>
+            
+            <h2 class="headings">Algorithm</h2>
+<pre class="code_description">
+    radixSort(arr)  
+    max = largest element in the given array  
+    d = number of digits in the largest element (or, max)  
+    Now, create d buckets of size 0 - 9  
+    for i -> 0 to d  
+    sort the array elements using counting sort (or any stable sort)
+    according to the digits at the ith place            
+</pre>
+            <p class="code_description">
+                
+            </p>
+
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+                    <textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;">
+//RADIX SORT
+#include <stdio.h>  
+  
+    int getMax(int a[], int n) {  
+       int max = a[0];  
+       for(int i = 1; i<n; i++) {  
+          if(a[i] > max)  
+             max = a[i];  
+       }  
+       return max; //maximum element from the array  
+    }  
+      
+    void countingSort(int a[], int n, int place) // function to implement counting sort  
+    {  
+      int output[n + 1];  
+      int count[10] = {0};    
+      
+      // Calculate count of elements  
+      for (int i = 0; i < n; i++)  
+        count[(a[i] / place) % 10]++;  
+          
+      // Calculate cumulative frequency  
+      for (int i = 1; i < 10; i++)  
+        count[i] += count[i - 1];  
+      
+      // Place the elements in sorted order  
+      for (int i = n - 1; i >= 0; i--) {  
+        output[count[(a[i] / place) % 10] - 1] = a[i];  
+        count[(a[i] / place) % 10]--;  
+      }  
+      
+      for (int i = 0; i < n; i++)  
+        a[i] = output[i];  
+    }  
+      
+    // function to implement radix sort  
+    void radixsort(int a[], int n) {  
+       
+      // get maximum element from array  
+      int max = getMax(a, n);  
+      
+      // Apply counting sort to sort elements based on place value  
+      for (int place = 1; max / place > 0; place *= 10)  
+        countingSort(a, n, place);  
+    }  
+      
+    // function to print array elements  
+    void printArray(int a[], int n) {  
+      for (int i = 0; i < n; ++i) {  
+        printf("%d  ", a[i]);  
+      }  
+      printf("\n");  
+    }  
+      
+    int main() {  
+      int a[] = {181, 289, 390, 121, 145, 736, 514, 888, 122};  
+      int n = sizeof(a) / sizeof(a[0]);  
+      printf("Before sorting array elements are - \n");  
+      printArray(a,n);  
+      radixsort(a, n);  
+      printf("After applying Radix sort, the array elements are - \n");  
+      printArray(a, n);  
+    } 
+</textarea>
+
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+
+                <!-- FOOTER STARTS -->
+                <footer>
+                    <div class="footer">
+
+                        <div class="first-content">
+                            <h3><a href="AboutUs.html">About Us</a></h3>
+                            <p>
+                                At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us
+                                needs helping hand.
+                                Delivering some relief in form solution to our problems makes us happy. We aim to be our
+                                users first
+                                thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                            </p>
+                        </div>
+
+                        <div class="middle-content">
+                            <a href="terms.html" style="margin: 5px;">Terms</a><br>
+
+                            <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+
+                            <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                                href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+
+                            <img src="img/phone_icon.png" alt="img" width="20px"
+                                style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a
+                                href="tel:+916234673424" style="float: left;margin-top: 30px;padding: 5px;">+91
+                                6234673424</a>
+
+                        </div>
+                        <div class="follow-us">
+                            <h3>Follow Us</h3>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                        </div>
+
+                        <div class="lower-footer">
+                            <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                        </div>
+
+                    </div>
+                </footer>
+                <!-- FOOTER ENDS -->
+</body>
+
+</html>

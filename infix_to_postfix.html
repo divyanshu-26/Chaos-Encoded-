@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Infix to Postfix Expression | Stack</title>
+    <style>
+        #infix_img{
+            margin-left: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head"> Infix to Postfix Expression conversion in Stack </h1>
+        <div id="main_content">
+            <p class="code_description">
+                One of the applications of Stack is in the conversion of arithmetic expressions in high-level programming languages into machine readable form. As our computer system can only understand and work on a binary language, it assumes that an arithmetic operation can take place in two operands only e.g., <b>A+B, C*D,D/A </b> etc. But in our usual form an arithmetic expression may consist of more than one operator and two operands e.g. <b>(A+B)*C(D/(J+D))</b>.
+                </p>
+            <p class="code_description">
+                These complex arithmetic operations can be converted into polish notation using stacks which then can be executed in two operands and an operator form.
+                </p>
+                <h3 class="algo_subheads">Infix Expression</h3>
+                <p class="code_description">
+                    It follows the scheme of <b>&#60;operand&#62;&#60;operator&#62;&#60;operand&#62;</b> i.e. an <b>&#60;operator&#62;</b> is preceded and succeeded by an <b>&#60;operand&#62;</b>. Such an expression is termed infix expression. E.g., <b>A+B</b>.
+                </p>.
+                <h3 class="algo_subheads">Postfix Expression</h3>
+            <p class="code_description">
+                It follows the scheme of <b>&#60;operand&#62;&#60;operand&#62;&#60;operator&#62;</b> i.e. an <b>&#60;operator&#62;</b>
+                is succeeded by both the <b>&#60;operand&#62;</b>. E.g., <b>AB+</b>.
+                </p>
+
+
+            </p>
+            <h2 class="headings">Algorithm</h2>
+
+            <p class="code_description">Let, <b>X</b> is an arithmetic expression written in infix notation. This algorithm finds the equivalent postfix expression <b>Y</b>.</p>
+            <p class="code_description">
+                <ol class="code_description">
+                    <li>Push <B>“(“</B> onto Stack, and add <B>“)”</B> to the end of <b>X</b>.</li>
+                    <li>Scan <b>X</b> from left to right and <b>repeat Step 3 to 6</b> for each element of <b>X</b> until the Stack is empty.</li>
+                    <li>If an operand is encountered, add it to <b>Y</b></li>
+                    <li>If a left parenthesis is encountered, push it onto Stack.
+                    </li>
+                    <li>If an operator is encountered ,then:
+                        <ol type="i">
+                            <li>Repeatedly pop from Stack and add to <b>Y</b> each operator (on the top of Stack) which has the same precedence as or higher precedence than operator.</li>
+                            <li>Add operator to Stack.
+                                [End of If]</li>
+                        </ol>
+                    </li>
+                    <li>If a right parenthesis is encountered ,then:
+                        <ol type="i">
+                            <li>Repeatedly pop from Stack and add to <b>Y</b> each operator (on the top of Stack) until a left parenthesis is encountered.</li>
+                            <li>Remove the left Parenthesis.
+                                [End of If]
+                                [End of If]</li>
+                        </ol>
+                    </li>
+                    <li>END</li>
+                </ol>
+
+            </p> 
+            <p  style="font-weight: bold;" class="code_description">Let's take an example to better understand the algorithm</p>
+            <p class="code_description">Infix Expression: <b>A+(B*C-(D/E^F)*G)*H</b>, where <b>^</b> is an exponential operator.</p>
+            <img id="infix_img" src="img\infix_postfix_example.jpg" alt="infix to postfix example" height="75%" width="70%">
+            <p class="code_description">Resultant Postfix Expression: <b>ABC*DEF^/G*-H*+</b></p>
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+<textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;" >
+//INFIX EXPRESSION TO POSTFIX EXPRESSION EVALUATION
+#include<stdio.h>
+    #include<stdlib.h>      
+    #include<ctype.h>     
+    #include<string.h>
+    #define SIZE 100
+    char stack[SIZE];
+    int top = -1;
+    
+    void push(char item)
+    {
+        if(top >= SIZE-1)
+        {
+            printf("\nStack Overflow.\n");
+        }
+        else
+        {
+            top = top+1;
+            stack[top] = item;
+        }
+    }
+    
+    char pop()
+    {
+        char item ;
+        if(top <0)
+        {
+            printf("\nStack underflow: Invalid infix expression.\n");
+            exit(1);
+        }
+        else
+        {
+            item = stack[top];
+            top = top-1;
+            return(item);
+        }
+    }
+    
+    int is_operator(char symbol)
+    {
+        if(symbol == '^' || symbol == '*' || symbol == '/' || symbol == '+' || symbol =='-')
+        {
+            return 1;
+        }
+        else
+        {
+        return 0;
+        }
+    }
+    
+    int precedence(char symbol)
+    {
+        if(symbol == '^')
+        {
+            return(3);
+        }
+        else if(symbol == '*' || symbol == '/')
+        {
+            return(2);
+        }
+        else if(symbol == '+' || symbol == '-')         
+        {
+            return(1);
+        }
+        else
+        {
+            return(0);
+        }
+    }
+    
+    void InfixToPostfix(char infix_exp[], char postfix_exp[])
+    { 
+        int i, j;
+        char item;
+        char x;
+    
+        push('(');                               
+        strcat(infix_exp,")");                  
+        i=0;
+        j=0;
+        item=infix_exp[i];         
+        while(item != '\0')        
+        {
+            if(item == '(')
+            {
+                push(item);
+            }
+            else if( isdigit(item) || isalpha(item))
+            {
+                postfix_exp[j] = item;              
+                j++;
+            }
+            else if(is_operator(item) == 1)        
+            {
+                x=pop();
+                while(is_operator(x) == 1 && precedence(x)>= precedence(item))
+                {
+                    postfix_exp[j] = x;                  
+                    j++;
+                    x = pop();                       
+                }
+                push(x);
+                push(item);                 
+            }
+            else if(item == ')')         
+            {
+                x = pop();                   
+                while(x != '(')                
+                {
+                    postfix_exp[j] = x;
+                    j++;
+                    x = pop();
+                }
+            }
+            else
+            { 
+                printf("\nInvalid infix expression.\n"); 
+                getchar();
+                exit(1);
+            }
+            i++;
+    
+    
+            item = infix_exp[i]; 
+        } 
+        if(top>0)
+        {
+            printf("\nInvalid infix expression.\n");        
+            getchar();
+            exit(1);
+        }
+        postfix_exp[j] = '\0'; 
+    }
+    
+    int main()
+    {
+        char infix[SIZE], postfix[SIZE];         
+        printf("\nEnter infix expression :- ");
+        gets(infix);
+        InfixToPostfix(infix,postfix);                   
+        printf("Postfix expression:- ");
+        puts(postfix);                     
+        return 0;
+    }
+                  </textarea>
+                  
+                  <button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+                  <script>
+                      // HTML BOx JS Code
+                      let HTMLBox = document.getElementById("HTMLBox");
+                      let CopyButton = document.getElementById("CopyButton");
+      
+                      CopyButton.onclick = function () {
+                          HTMLBox.select();
+                          document.execCommand("copy");
+                          // HTMLButton.innerImg = "Codes Copied"
+                      }
+                  </script>
+                  </div>
+              </main>
+                  <!-- BODY ENDS -->
+
+            
+            <!-- FOOTER STARTS -->
+            <footer>
+                <div class="footer">
+        
+                    <div class="first-content">
+                        <h3><a href="AboutUs.html">About Us</a></h3>
+                        <p>
+                            At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us needs helping hand.
+                            Delivering some relief in form solution to our problems makes us happy. We aim to be our users first
+                            thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                        </p>
+                    </div>
+        
+                    <div class="middle-content">
+                        <a href="terms.html" style="margin: 5px;">Terms</a><br>
+        
+                        <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+        
+                        <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                            href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+        
+                        <img src="img/phone_icon.png" alt="img" width="20px"
+                            style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a href="tel:+916234673424"
+                            style="float: left;margin-top: 30px;padding: 5px;">+91 6234673424</a>
+        
+                    </div>
+                    <div class="follow-us">
+                        <h3>Follow Us</h3>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                        <div class="icon">
+                            <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                        </div>
+        
+                    </div>
+        
+                    <div class="lower-footer">
+                        <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                    </div>
+        
+                </div>
+            </footer>
+            <!-- FOOTER ENDS -->
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS\code_body.css">
+    <link rel="stylesheet" href="CSS\header-footer.css">
+    <title>Selection Sort | DSA </title>
+</head>
+
+<body>
+    <!-- HEADER STARTS -->
+    <header>
+        <a id="top"></a>
+
+        <div id="topheader">
+
+            <div id="logo">
+                <img src="img/logo.png" alt="Logo" width="150px">
+            </div>
+
+            <div class="chaosencoded">
+                <p>
+                    <a href="Index.html">
+                        <h1>Chaos <br> &lt; &#8725; Encoded &gt;</h1>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="nav-bar">
+
+            <a href="Index.html">Home</a>
+            <a href="AboutUs.html">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+        </nav>
+
+    </header>
+    <!-- HEADER ENDS -->
+
+    <!-- BODY STARTS -->
+
+    <main>
+        <h1 class="main_head">Selection Sort </h1>
+        <div id="main_content">
+            <p class="code_description">
+                In selection sort, the smallest value among the unsorted elements of the array is selected in every pass
+                and inserted to its appropriate position into the array. It is also the simplest algorithm. It is an
+                in-place comparison sorting algorithm. In this algorithm, the array is divided into two parts, first is
+                sorted part, and another one is the unsorted part. Initially, the sorted part of the array is empty, and
+                unsorted part is the given array. Sorted part is placed at the left, while the unsorted part is placed
+                at the right.
+            </p>
+            <p class="code_description">
+                In selection sort, the first smallest element is selected from the unsorted array and placed at the
+                first position. After that second smallest element is selected and placed in the second position. The
+                process continues until the array is entirely sorted.
+            </p>
+            <p class="code_description">
+                We assume that the first card is already sorted then, we select an unsorted card. If the unsorted card
+                is greater than the card in hand, it is placed on the right otherwise, to the left. In the same way,
+                other unsorted cards are taken and put in their right place.
+            </p>
+            <p class="code_description">
+                We have an array {6, 3, 8, 12, 9} in this array the smallest element is 3. So we will place 3 at the
+                first position, after this the array will look like {3, 6, 8, 12, 9}. Now we will again find the
+                smallest number but this time we will not consider 3 in our search because it is in its place. Finding
+                the next smallest element that is 6, creating an array with 6 at the second position and then again
+                searching in the array till the array is sorted.
+            </p>
+            <p class="code_description">
+                The average and worst-case complexity of selection sort is <b>O(n2)</b>, where n is the number of items.
+                Due to this, it is not suitable for large data sets.
+            </p>
+            <p class="code_description">
+                Selection sort is generally used when -
+            </p>
+            <ul class="code_description" type="circle">
+                <li>A small array is to be sorted.</li>
+                <li>Swapping cost doesn't matter.</li>
+                <li>It is compulsory to check all elements.</li>
+            </ul>
+            <h2 class="headings">Working</h2>
+            <ol class="code_description" type="1">
+                <li>Set the first element as <b>minimum</b>.</li>
+                <li>Compare <b>minimum</b> with the second element. If the second element is smaller than <b>minimum</b>, assign the second element as <b>minimum</b>.
+                <br>
+                Compare <b>minimum</b> with the third element. Again, if the third element is smaller, then assign <b>minimum</b> to the third element otherwise do nothing. The process goes on until the last element.
+            </li>
+                <li>After each iteration, <b>minimum</b> is placed in the front of the unsorted list.</li>
+                <li>For each iteration, indexing starts from the first unsorted element. <b>Step 1 to 3 are repeated</b> until all the elements are placed at their correct positions.</li>
+            </ol>
+
+            <h2 class="headings">Algorithm</h2>
+
+<pre class="code_description">
+    SELECTION SORT(arr, n)  
+        
+    Step 1: Repeat Steps 2 and 3 for i = 0 to n-1  
+    Step 2: CALL SMALLEST(arr, i, n, pos)  
+    Step 3: SWAP arr[i] with arr[pos]  
+    [END OF LOOP]  
+    Step 4: EXIT  
+        
+    SMALLEST (arr, i, n, pos)  
+    Step 1: [INITIALIZE] SET SMALL = arr[i]  
+    Step 2: [INITIALIZE] SET pos = i  
+    Step 3: Repeat for j = i+1 to n  
+    if (SMALL > arr[j])  
+        SET SMALL = arr[j]  
+    SET pos = j  
+    [END OF if]  
+    [END OF LOOP]  
+    Step 4: RETURN pos 
+        </pre>
+
+            <h2 class="headings">Program using C</h2>
+            <!-- CODE BOX -->
+            <textarea id="HTMLBox" readonly style="font-size:15px; height:700px;width:800px;border:1px solid; overflow:scroll;
+background-color:rgb(237, 237, 237); color:rgb(0, 0, 0);
+scrollbar-base-color:rgb(190, 188, 178);font-family:Consolas;">
+//SELECTION SORT
+#include <stdio.h>  
+  
+    void selection(int arr[], int n)  
+    {  
+        int i, j, small;  
+          
+        for (i = 0; i < n-1; i++)    // One by one move boundary of unsorted subarray  
+        {  
+            small = i; //minimum element in unsorted array  
+              
+            for (j = i+1; j < n; j++)  
+            if (arr[j] < arr[small])  
+                small = j;  
+    // Swap the minimum element with the first element  
+        int temp = arr[small];  
+        arr[small] = arr[i];  
+        arr[i] = temp;  
+        }  
+    }  
+      
+    void printArr(int a[], int n) /* function to print the array */  
+    {  
+        int i;  
+        for (i = 0; i < n; i++)  
+            printf("%d ", a[i]);  
+    }  
+      
+    int main()  
+    {  
+        int a[] = { 12, 31, 25, 8, 32, 17 };  
+        int n = sizeof(a) / sizeof(a[0]);  
+        printf("Before sorting array elements are - \n");  
+        printArr(a, n);  
+        selection(a, n);  
+        printf("\nAfter sorting array elements are - \n");    
+        printArr(a, n);  
+        return 0;  
+    }
+</textarea>
+
+<button id="CopyButton"><img src="img\copy.png" alt="" width="25px"></button>
+<script>
+    // HTML BOx JS Code
+    let HTMLBox = document.getElementById("HTMLBox");
+    let CopyButton = document.getElementById("CopyButton");
+
+    CopyButton.onclick = function () {
+        HTMLBox.select();
+        document.execCommand("copy");
+        // HTMLButton.innerImg = "Codes Copied"
+    }
+</script>
+</div>
+</main>
+<!-- BODY ENDS -->
+
+
+                <!-- FOOTER STARTS -->
+                <footer>
+                    <div class="footer">
+
+                        <div class="first-content">
+                            <h3><a href="AboutUs.html">About Us</a></h3>
+                            <p>
+                                At <strong>www.chaosencoded.com </strong> believe that once in a while each one of us
+                                needs helping hand.
+                                Delivering some relief in form solution to our problems makes us happy. We aim to be our
+                                users first
+                                thought when they need a solution regarding DATA STRUCTURE using C programming language.
+                            </p>
+                        </div>
+
+                        <div class="middle-content">
+                            <a href="terms.html" style="margin: 5px;">Terms</a><br>
+
+                            <a href="privacy.html" style="line-height:50px; margin: 5px;">Privacy Policy</a><br>
+
+                            <img src="img/email_icon.png" alt="img" width="30px" style="float: left;clear: both;"><a
+                                href="mailto:chaosencoded@gmail.com" style="float: left;line-height: 18px;
+                        padding: 5px;">chaosencoded@gmail.com</a>
+
+                            <img src="img/phone_icon.png" alt="img" width="20px"
+                                style="float: left;clear: both;margin-top: 30px;margin-left: 2px;"><a
+                                href="tel:+916234673424" style="float: left;margin-top: 30px;padding: 5px;">+91
+                                6234673424</a>
+
+                        </div>
+                        <div class="follow-us">
+                            <h3>Follow Us</h3>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/fb_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/insta_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/github_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                            <div class="icon">
+                                <a href="#" target="_blank"><img src="img/twitter_icon.png" alt="img" width="30px"></a>
+                            </div>
+
+                        </div>
+
+                        <div class="lower-footer">
+                            <p>@Copyright 2022 - ChaosEncoded. All rights reserved.</p>
+                        </div>
+
+                    </div>
+                </footer>
+                <!-- FOOTER ENDS -->
+</body>
+
+</html>
